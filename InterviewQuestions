@@ -1,1 +1,34 @@
-ahshsh
+Interview Questions- AZ 104
+1. What is Azure and what are its main components?
+Azure is a cloud computing platform provided by Microsoft. Its main components include compute, storage, networking, database, and security services. These services can be used to build, deploy, and manage various types of applications and workloads in the cloud.
+
+2. What is Azure Resource Manager (ARM) and how does it differ from classic deployment model?
+Azure Resource Manager (ARM) is a "deployment model" in Azure that enables you to manage resources as a group, known as a resource group. ARM allows you to deploy, update, and delete resources in a coordinated and predictable manner, 
+whereas the classic deployment model is an older deployment model in Azure that does not have these capabilities.
+
+3. What is a virtual network in Azure and what are its main components?
+A virtual network in Azure is a representation of a network in the cloud. 
+Its main components include subnets, network security groups, routes, and virtual network gateways. 
+A virtual network enables you to create a secure and isolated network environment in the cloud to host your virtual machines and other resources.
+
+4. What is Azure Active Directory (AD) and what are its main features?
+Azure Active Directory (AD) is a cloud-based directory and identity management service provided by Microsoft.
+Its main features include user and group management, single sign-on (SSO), multi-factor authentication (MFA), and identity protection. 
+Azure AD enables you to manage and secure your users, devices, and applications in the cloud.
+
+5. What is the difference between an Azure storage account and an Azure file share?
+An Azure storage account is a cloud-based storage solution that provides scalable and durable storage for various types of data, such as blobs, tables, queues, and files. 
+Further, an Azure file share is a network file share that is hosted in Azure and is accessible via the Server Message Block (SMB) protocol. 
+An Azure file share is stored in an Azure storage account, but it is a separate service from other storage services in the same account.
+
+6. How can you secure data in Azure storage accounts?
+You can secure data in Azure storage accounts by using encryption, access control, and monitoring. You can encrypt data at rest using Azure Storage Service Encryption (SSE) or client-side encryption. Also, you can control access to data using shared access signatures (SAS) or Azure Active Directory (AD) authentication. You can monitor access to data using Azure Storage Analytics.
+100%
+Windows (CRLF)
+UTF-8
+To configure and manage storage in Azure, you can follow these steps:
+Create a storage account: A storage account is a logical container for storing data in Azure. You can create a storage account using the Azure portal, Azure CLI, or Azure Powershell.
+7. How can you configure and manage storage in Azure?
+Ln 212, Col 28
+21,821 characters
+AA Formatted
