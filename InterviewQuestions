@@ -100,4 +100,30 @@ Network virtual appliances or NVAs are virtual machines that control the flow of
 Network communication between services in various virtual networks can be made possible by virtual network peering. When you need to integrate Azure virtual networks, virtual network peering should be your first choice because it's simple to set up and deploy, and it works across regions and subscriptions.
 
 18. What are alias record?
+Azure alias records enable a zone apex domain to reference other Azure resources from the DNS zone. You don't need to create complex redirection policies and an alias can also route all traffic through Traffic Manager.
+The Azure alias record can point to the following Azure resources:
+A Traffic Manager profile
+Azure Content Delivery Network endpoints
+A public IP resource
+A front door profile
+What is Azure DNS
+Using a globally distributed name server architecture, Azure DNS allows you to host and administer your domains. Using your existing Azure credentials, you may manage all of your domains. Azure DNS serves as the domain's SOA. 
+However, you cannot register a domain name using Azure DNS. To register your domain, you'll need to go through a third-party registrar.
+
+19.How do you connect Virtual Network?
+Virtual network peering is a technique for connecting virtual networks. Peering allows virtual network resources to communicate with one another. These virtual networks can be in different zones, allowing you to use Azure to build a global interconnected network.
+
+I have some private servers on my premises, also I have distributed some of my workloads on the public cloud, what is this architecture called? 
+This type of architecture would be a hybrid cloud because we are using both, the public cloud, and on-premises servers ie the private cloud.
+
+20.What are the three main components of the Windows Azure platform?
+Three most important components of the Windows Azure platform are:
+Compute Storage
+AppFabric
+
+21.What is an Availability Set?
+An availability set is a logical grouping of virtual machines that helps Azure understand how your application can constructed for redundancy and availability. 
+When using Azure Premium Storage with a single VM, the Azure SLA applies to unscheduled maintenance events. To provide a highly available application and to achieve the 99.95 percent Azure SLA, it is suggested that two or more VMs be established inside an availability set.
+
+22. what are fault Domains and Update Domains?
 
