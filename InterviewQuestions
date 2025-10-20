@@ -74,5 +74,30 @@ These are just a few of the disaster recovery solutions available in Azure. Orga
 11. What is Microsoft Azure?
 Azure is a cloud computing platform that was launched by Microsoft in Feb 2010. It's a cloud platform that helps in development, data storage, service hosting, and management.
 
+12. What is Cloud Computing?
+The term "cloud computing" refers to the process of storing and accessing data over the internet. However, it does not save any data on your computer's hard drive and only allows you to retrieve data from a remote server.
 
+Explain the Importance of the role and how many types of roles are available in Windows Azure?
+Roles are a very important concept in Windows Azure, and learning them is the base for further programming. Three types of roles in Windows Azure are:
+Web Role: It deploys a website by using langue that has support of the IIS platform for running the web apps.
+Worker Role: It helps you to execute the process that runs in the background by
+VM Role: It helps you to schedule the windows services and task.
+
+13. Explain command task in Microsoft Azure
+When the system is running, a command task is an operational window that starts the flow of one or more common whiles.
+
+14. What are unconnected lookups?
+The input ins taken by the LKP procedure are unconnectedly looked up. User-defined values are ignored in unconnected lookups in this type of lookup procedure. Explain Cmdlet command of Microsoft Azure
+A cmdlet is a command that can be used in the Microsoft PowerShell environment. Windows PowerShell uses the cmdlet to automate programs that run from the command line.
+
+15.What is the use of the Migration Assistant tool in Azure Websites?
+You can use the Migration Assistant programme to analyse your IIS installation. It assists you in determining which sites can move to the cloud. It also includes components that does not move or do not have support on the Azure platform.
+
+16. What is Network virtual appliance?
+Network virtual appliances or NVAs are virtual machines that control the flow of network traffic by controlling routing. A WAN optimizer, application-delivery controllers, routers, load balancers, proxies, and an SD-WAN edge are common components of an NVA. They commonly control traffic flowing from a perimeter network to other networks or subnets.
+
+17. When to choose Virtual Network Peering?
+Network communication between services in various virtual networks can be made possible by virtual network peering. When you need to integrate Azure virtual networks, virtual network peering should be your first choice because it's simple to set up and deploy, and it works across regions and subscriptions.
+
+18. What are alias record?
 
