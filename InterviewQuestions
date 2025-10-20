@@ -22,13 +22,12 @@ Further, an Azure file share is a network file share that is hosted in Azure and
 An Azure file share is stored in an Azure storage account, but it is a separate service from other storage services in the same account.
 
 6. How can you secure data in Azure storage accounts?
-You can secure data in Azure storage accounts by using encryption, access control, and monitoring. You can encrypt data at rest using Azure Storage Service Encryption (SSE) or client-side encryption. Also, you can control access to data using shared access signatures (SAS) or Azure Active Directory (AD) authentication. You can monitor access to data using Azure Storage Analytics.
-100%
-Windows (CRLF)
-UTF-8
-To configure and manage storage in Azure, you can follow these steps:
-Create a storage account: A storage account is a logical container for storing data in Azure. You can create a storage account using the Azure portal, Azure CLI, or Azure Powershell.
+You can secure data in Azure storage accounts by using encryption, access control, and monitoring. 
+You can encrypt data at rest using Azure Storage Service Encryption (SSE) or client-side encryption. Also, you can control access to data using shared access signatures (SAS) or Azure Active Directory (AD) authentication.
+You can monitor access to data using Azure Storage Analytics.
+
 7. How can you configure and manage storage in Azure?
-Ln 212, Col 28
-21,821 characters
-AA Formatted
+To configure and manage storage in Azure, you can follow these steps:
+Create a storage account: A storage account is a logical container for storing data in Azure. 
+You can create a storage account using the Azure portal, Azure CLI, or Azure Powershell.
+
