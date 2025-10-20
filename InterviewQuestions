@@ -148,3 +148,24 @@ It certainly does. You can update the container for private registries by stoppi
 25. What are the three types of RBAC controls in Microsoft Azure? 
 The three different types of roles are :
 
+Owner: It has full access to all resources including the right to delegate access to others. 
+Contributor: It can create and manage all types of Azure resources but can't grant access to others.
+Reader: It can view existing Azure resources.
+
+26.What should you do if your Azure Virtual Machine encounters issues caused by user configurations or host infrastructure? 
+You can try to move the virtual machine to a different host using Virtual Machine-Redeploy blade.
+27. What are the steps to move an Azure Virtual Machine from one virtual network to another virtual network?
+Delete a virtual machine in VNET1
+Create a virtual machine in VNET2
+Attach an existing disk to the newly created VM
+Define Windows Azure AppFabric.
+You can use Windows Azure Diagnostics to collect diagnostic data from a Windows Azure application and use it for capacity planning and evaluation. Windows Azure AppFabric is the name of the procedure.
+28. What is the distinction between Windows Azure Queues and Windows Azure Service Bus Queues?
+Azure Queues are responsible for solid and particular messaging between and within the services. They emphasize on a very straightforward rest-based get/put/peek interface as well. Bus Queues are for a more extensive Windows Azure messaging framework to support queuing.
+29. How can you configure redundancy for an Azure Storage account?
+By selecting the appropriate replication option (Correct)
+By increasing the number of virtual machines
+By enabling self-service password reset
+By configuring resource locks
+-> The correct answer is By selecting the appropriate replication option. Azure Storage offers various replication options to ensure data durability. These options provide different levels of redundancy and availability. Choosing the right replication strategy is essential for disaster recovery.
+
