@@ -126,4 +126,25 @@ An availability set is a logical grouping of virtual machines that helps Azure u
 When using Azure Premium Storage with a single VM, the Azure SLA applies to unscheduled maintenance events. To provide a highly available application and to achieve the 99.95 percent Azure SLA, it is suggested that two or more VMs be established inside an availability set.
 
 22. what are fault Domains and Update Domains?
+A fault domain, like a rack in an on-premise data centre, is a logical grouping of the underlying hardware that shares a common power source and network switch. The Azure platform distributes your VMs among various fault domains as you construct them inside an availability set. 
+This method reduces the impact of physical hardware failures, network outages, and power outages.
+An update domain is a logical collection of the underlying hardware that can offer service or reboot at the same time. 
+The Azure platform distributes your VMs among various update domains as you build VMs inside an availability set. As the Azure platform undergoes periodic maintenance, this strategy ensures that at least one instance of your application is always running, but only one update domain restarts at a time. 
+
+23.What is autoscaling in Azure?
+Auto-scaling is a method of automatically increasing or decreasing the number of computer resources allocated to your program based on its current needs. The important aspect is that you can now create a scalable architecture that can automatically scale up or down to meet your demands over the lifespan of your setup, regardless of how fast or slow your site grows.
+Here are the most popular ways of autoscaling:
+Horizontal Scaling 
+Vertical Scaling
+What happens when you exhaust the maximum failed attempts for authenticating yourself via Azure AD?
+To lock accounts, we employ a more advanced technique. This is determined by the request's IP address and the passwords submitted. The length of the lockout is also determined by the likelihood of an attack.
+
+24.What is the difference between Service Bus Queues and Storage Queues?
+The Azure Storage Queue is easy to use and has a nice developer experience. It makes use of the local Azure Storage Emulator, which makes debugging a breeze. You can quickly peek at the top 32 messages using the Azure Storage Queues tools, and if, the messages are in XML or JSON, you can visualise their contents right from Visual Studio. Furthermore, the contents of these queues can cleanse, which is particularly valuable during development and quality assurance operations. The Azure Service Bus Queues, on the other hand, have a number of beneficial processes that make them enterprise-worthy! They're part of the Service Bus and can pass messages through to other Queues and Topics. They feature a built-in dead-letter queue, and messages have a time limit that you choose, so messages don't vanish after seven days.
+My web app still uses an old Docker container image after I've updated the image on Docker Hub. Does Azure support continuous integration/deployment of custom
+containers?
+It certainly does. You can update the container for private registries by stopping and restarting your web app. You can also force an update of your container by changing or adding a mock application option.
+
+25. What are the three types of RBAC controls in Microsoft Azure? 
+The three different types of roles are :
 
