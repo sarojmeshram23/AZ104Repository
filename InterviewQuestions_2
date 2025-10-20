@@ -1,1 +1,28 @@
 1. what does configuring object replication in Azure storage achieve ?
+It copies data between storage accounts (Correct)
+It increases network throughput
+It automates user provisioning
+It manages storage account encryption
+-> The correct answer is It copies data between storage accounts. Object replication synchronizes data across different regions. It enhances data availability and disaster recovery capabilities. This ensures that your data remains accessible even if one region experiences issues.
+3. Which services are used for container management in Azure? (Choose 2)
+Azure Container Instances, Azure Container Apps (Correct) 
+Azure Virtual Machines Azure App Service 
+Azure Backup Back Next
+Show Explanation
+The correct answers are Azure Container Instances and Azure Container Apps. Both services are specifically designed for running containerized workloads. They provide different deployment and scaling options for containers. This flexibility supports various container management scenarios.
+4. Which Azure service is designed for serverless container hosting?
+Azure Container Instances (Correct) Azure Virtual Machines Azure App Service
+Azure Functions
+Show Explanation
+The correct answer is Azure Container Instances. This service enables running containers without managing the underlying infrastructure. It offers rapid deployment and scaling. It simplifies container management and reduces operational overhead.
+5. Which features enhance data protection in Azure Storage? (Choose 2)
+Configure soft delete for blobs and containers
+Configure blob lifecycle management
+Manage virtual machine disks
+Configure snapshots for Azure Files
+Assign built-in roles for governance
+
+explanation-> the correct answer is Configure soft delete  for blobs and containers and configure snapshot for Azure files. these features provide recovery options if data is accidentally deleted. 
+they add an extra layer of protection for your data.
+this ensures that critical information can be reatored when needed.
+
