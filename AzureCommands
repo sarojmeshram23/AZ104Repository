@@ -1,1 +1,114 @@
+portal.azure.com/
+What Cloud Compting ?
+CC is a platform that provides access to computing resources over the internet.
+What is azure ?
+Azure is a cloud computing platform and an online portal to access & manage resources and services provided by Microsoft.
+MS Azure is a set of cloud services to help uc organization meet your business challenges. It's the freedom to build, manage & deploy applications on a massive, global network(eg deploy from India to USA).
+Variuos cc services -->> computing, st, DB, monitoring, compliance, securing.
+Azure is one of "vendor or service provider" of cloud computing is MS azure; Azure launched on Feb 1st, 2010.
+Azure services are divided into 18 categories and contains more than 200 services.
+Compute, Networking, Storage, Security, Databases, DevOps, Identity, Web,
+IOT, Migration, Mobile, Media,
+Analytics. containers, AI + Machine learning, Integration, Management tools, Developer Tools.
+Compute-> VM, Cloud service, Service Fabric, Functions.
+VM -> can create VM for windows or unix 05.
+Cloud service -> we can create application within cloud, all of work after u deployed, [[then all other things will be taken care - provisioning, load balancing, health monitoring are handled by Azure post-deployment.
+Service Fabric -> the process of developing microservice is greatly simplified. Microservices is application that consist of smaller applications coupled together Function -> can create applications in any prgming language, no worry about hardware component e.g. RAM
+Networking -> Azure CDN, Express route, VN, Azure DNS..
+Azure CDN -> is basically for delivering web content to user.
+Express Route -> connect to on-premise network.
+VN -> VN enables azure resources to securely communicate with each other.
+Azure DNS -> is a hosting service that allows the user to host their DNS domains in azure.
+Storage -> Disk storage, Blob, File, Queue
+Disk Storage (HDD/SDD), Blob Storage (Store massive amt of unstructured data), File Storage, Queue Storage (durable msg queuing)
+
+
+View
+B IGAB
+Azure cloud services can be categorized as Compute, Network, Data and Storage, App Services, etc.
+IAAS -> Allows the user to access, manage and monitor the data centers. Thus, giving complete control of the OS and the application platform stack to the developers. PAAS -> Azure as PaaS (Platform as a Service)
+The client is provided with the platform to develop and deploy software, without having to think about hardware and infrastructure. It takes care of most of the 05, servers and networking issues. (Here complete platform provided by vendor, Entering certain details and it does everything for you. Launch taken care by vendor, platform is prvided by Vendor, u need to add few details. Web app in PAAS launch this VM instance, sec group, assign network thse are just need to add few details, )
+PaaS is fast with less hassle for developers; applications can go from idea to availability more quickly.
+PaaS is cost-effective with lower upfront investment and less admin / management work for organizations.
+PaaS lowers risk as platform is upto date with latest technology stack and tools for automation.
+SAAS -> Software as a service (SaaS) allows users to connect to and use cloud-based apps over the Internet, such as "Office365". Also refereed as software delivered over the web.
+***Accessing Azure
+Azure can be accessed and managed through:
+1. Azure Classic Portal (This was the first portal in Azure)
+2. Azure ARM portal (is now the default portal & It supports new features like Templates based deployments, Role-based Access Control (RBAC), Customized dashboards to view key resources).
+3. Azure Resource Manager
+4. Client Tools like :- PowerShell, Azure CLI, Visual Studio with Azure SDK for .NET
+Cloud shell -> is the cmd prompt provided by azure.
+Powershell -> "It is a task automation & configure management framework from MS", consists of command-line shell & associated scripting language. Initially windows component only, k/as Windows Powershell. Tasks are executed by command-lets (cmdlets).
+Each command-let contains verb which describe action that will be taken, e.g. Get-Process (retrieve list of processes), Join-patch.
+Azure powershell is a set of cmdlets designed to help with mgment of azure resources directly from the Powershell command line.
+***Common Scenarios
+Azure Powershell can be used for
+1. Day to day operations: Automation of repetitive tasks, Scheduling, Deployments.
+2. Devops scenarios
+
+3. Achieving things that are hard to achieve otherwise. (eg at a time wants to create multiple resources.)
+***Two module bundles
+1. AzureRm (old module)
+2. Az (new modules, recommended)
+Install-Module Az Force -AllowClobber -> This will
+Import-Module Az
+Connect-AzAccount -> login to ur account
+Ctrl + space to get intellicense + Enter
+Get-AzContext -> By using this we can see what kind of environment we are logged into
+Select-AzSubscription -Subscription "subscrr name"
+Get-AzResourceGroup
+Get-AzResourceGroup | Format-Table
+"
+Get-AzResourceGroup | Format-List
+Get-AzResourceGroup | Format-Wide
+Get-AzResourceGroup | Export-Csv
+Get-AzResourceGroup | Out-GridView -> opens a new window and show data in tabular format.
+Get-AzResourceGroup | select ResourceGroupName, Location
+Filtering ->
+Get-AzResourceGroup | Where-Object { $_. Location -eq "northeurope"} | select ResourceGroupName, Location --> Here $ is the currect object.
+New-AzResourceGroup -Name amdemo -Location 'North Europe'
+New-AzVM -ResourceGroupName amdemo - Location 'North Europe' -Name ymdemo - Image UbuntuLTS
+***We can also use Powershell ISE, Which gives us text editor, multitab, shell comd at bottom and list of commands at right ** We can also use VS code to write Powershell script, AT the bottom select powershell and intellisense will be provided.
+**Create account
+**Create account
+$rg="amdemo"
+foreach($i in 1..10)
+{
+New-AzStorageAccount
+ResourceGroupName $rg
+-Name "amdemostorage$i" -SkuName Standard LRS
+-Location 'North Europe' -As Job
+}
+H1
+>
+BIG A
+(Select all and press F8)
+==> We can use "shell.azure.com" to work only on powershell in full screen mode.
+OS X
+Scalable
+VM
+In which operating system, we can use Azure CLI? -> All
+******Few Commands
+1. Create a Resource Group (if you don't have one):
+az group create
+--name MyDotNetResourceGroup --location eastus
+2. Create the Virtual Machine:
+You can choose a Windows Server image like Win2022Datacenter or Win2019Datacenter. These images generally come with .NET Framework pre-installed, or are easily configurable for .NET development.
+
+az vm create \
+--resource-group MyDotNetResourceGroup --name MyDotNetVM \
+--image Win2022Datacenter \
+admin-username azureuser \
+--admin-password "YourStrongPassword123!" \
+--public-ip-sku Standard \
+--size Standard_DS1_v2 # Example size, choose based on your needs
+3. Create Guest user account for external user
+New-AzureADMSInvitation
+4. Set-AzMarketplaceJerms
+-> invite new external user to uc directory.
+Accept or reject terms for a given publisher id (publisher), offere id (product), and plan id (Name).
+5. azcopy can be used with blob and files.
+azcopy list https://az104tips.blob.core.windows.net/myfiles/
+
 
