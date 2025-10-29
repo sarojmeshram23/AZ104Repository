@@ -1,118 +1,134 @@
-TRE
-TO
 Microsoft Entra ID -> We have been working with azure resources with azure admin account.
 Access, permission, create users,
+
 MS Entra ID -> This is a cloud based identity & access management service. This identity service can be used for Azure, MS 365 & even other SAAS applications. -> We can have users, users can be part of groups, we can have application.
 -> MS Entra ID first perform authentication (Identity of user verified) and then authorization (permission are checked for the user).
+
 ENtra ID -> Users -> New User -> Can create a new user OR invite an external user. -> Now sign IN portal using new created user & password -> We can not see the resources here for new user.
+
 ***RBAC
 Roles -> means a set of permissions.
 -> you can assign a role at the subscription level.
 -> assign a role at resource level
 -> assign role at resource group level.
-TOP ROLES -> Owner roles,
+
+TOP ROLES -> 
+Owner roles,
 Contributor role,
 acces to another user
-User Access Administrator role -> to give perminssn to user to delegate acces Reader Role
-Go to RG -> app-grp -> Roll Access -> Add role assignment -> Select "Reader" -> Select Members -> select username -> Review + Assign (we can't stop the VM) Go to RG -> app-grp -> Roll Access -> Add role assignment -> Select "Contributor" -> Select Members -> select username -> Review + Assign (Able to stop the VM) From USerA, we will be able to create storage account coz of contributor level. contributor role -> All actions on all types
+User Access Administrator role -> to give perminssn to user to delegate acces 
+Reader Role
+
+Go to RG -> app-grp -> Roll Access -> Add role assignment -> Select "Reader" -> Select Members -> select username -> Review + Assign (we can't stop the VM) 
+Go to RG -> app-grp -> Roll Access -> Add role assignment -> Select "Contributor" -> Select Members -> select username -> Review + Assign (Able to stop the VM) 
+From USerA, we will be able to create storage account coz of contributor level. 
+contributor role -> All actions on all types
+
 Remove role -> RG/VM -> IAM -> Role assignment -> Select role which u want to delete -> select "Delete" Action.
+
 Storage Account -> we can assign diff role, more filtered role,
 Storage Account Contributor -> allows to manage & create storage accounts.
 Data Actions -> Storage Blob Data Contributor -> allows to read, write, delete the containers & blobs. Storage Blob Data Reader -> Allows to read and list containers of blob.
 e.g. if we give user permission s.a, "Storage Blob Data Reader" then the user will not be able to see any resources/StorageAccount because user has permission to read the data within StorageAccount but not the StorageAccount itself. so need to give extra permission. We can give "Reader" role on StoragAcc to view the storageAccount.
-**How to add Conditions for RBAC 
 
-TR
-T
-View
-**How to add Conditions for RBAC
-H1
-E BIG A
+**How to add Conditions for RBAC 
 IAM -> Role Assignment -> "condition" (last column in table) can be set for already assigned roles -> Select "Add" -> Select "VIsual" type, --> Contion (Action, build expression) -> Action as List blob and select a blob, Attribute (select resource, attribute as "resource name") stringEquals "data"
+
 **Role Assignment for Azure VM ->
-VM Administrator login -> users can log onto machine with Admin priviledge VM User login -> users can log onto machine with regular user priviledge.
+VM Administrator login -> users can log onto machine with Admin priviledge 
+VM User login -> users can log onto machine with regular user priviledge.
 VM Contributor -> Users can create and manage VMs, manage the disks.
+
 ***Custom Roles
 E.g.Actions across diff resources
-Go to RG --> IAM -> Select Custom role -> Add name, Select "start from scratch" -> Next Permissions -> Select "Add permissions" -> Select "MS compute" -> Select Actions -> Select permissions for VM -> Next -> Create
+Go to RG --> IAM -> Select Custom role -> Add name, Select "start from scratch" -> Next Permissions -> Select "Add permissions" -> Select "MS compute" -> 
+Select Actions -> Select permissions for VM -> Next -> Create
+
 **MS ENtra ID Roles -> MS Entra ID is a large service where we can do a lot in terms of security, delegate permissions to other users.
+
 MS Entra ID Roles -> This gives user permission to carry out operations within MS entra ID. This is diff from permissions given to resources to an azure subscription. Under MS ENtra ID, different roles are there.
+
 Go to MS ENtra ID -> Role -> Select User Administrator -> Select "Add Assignments" -> Select "User A" -> Add
+
 View -> GO to VSers under ENtra -> Select UserA -> MAnage (Assigned Roles) -> u can view role here -> Here coz of permission u will be able to create new user. If we remove this permission UserA will not be able to create new User.
+
 ***MS Entra ID custom roles ->
 "Security Admin Role" in terms of RBAC, "Security REader role" in ENtra VN, NSG, create user in MS ENTRA ID,
+
 **MS ENtra ID -Inviting external identities =>
 B2B collaboration -> u have ability to invite guest users.
-2.Ø.Emolovess in orø, external orø for collaboration or may be access for few days.
-
-TR
-TO
-File
-Edit View
-H1 ✓ ✓ BIG AB e.g.Employess in org, external org for collaboration or may be access for few days.
+e.g.Employess in org, external org for collaboration or may be access for few days.
 If they have their own identities then u can just invite them as guest usef.
 e.g. I have outlook account, How do we invite this outlook user.
+
 Entra ID -> Users -> Invite external User -> Add email id ->Click invite.
 Go to outlook and accept invitation.
+
 MS Entra ID Licences =>
 1. MS Entra ID Free
-2. MS ENtra ID P1 -> for more Security, dynamic membership, self--service group management. 3. MS ENtra ID P2
+2. MS ENtra ID P1 -> for more Security, dynamic membership, self--service group management. 
+3. MS ENtra ID P2
 4. MS Entra ID governance Licence
-admin.microsoft.com (MS 365 admin center) -> This is used for purchasing MS Entra ID licence -> This is used for managing M365 base products but when it comes to licencing we will need to basically use this interface. MS Entra ID is used as Identity provider not only for azure but for MS 365 as well.
+
+admin.microsoft.com (MS 365 admin center) -> This is used for purchasing MS Entra ID licence -> This is used for managing M365 base products but when it comes to licencing
+we will need to basically use this interface. MS Entra ID is used as Identity provider not only for azure but for MS 365 as well.
+
 create a user with Global administrator role and then go to admin center logging using global admin and...
+
 ***Assigning licences to user (This is done from ADMIN Center)
 Entra -> Liceneces -> All products
 Admin center -> Users -> Active users -> Select user -> select username -> Licences & apps TAB -> ENtra P2 select -> Save changes.
+
 ***Assigning licences using groups
 Entra ID -> Groups -> New group -> Group Type:Security, Name: GroupA
-"
 Go to users -> create new user -> UPN:UserB, -> Next -> Assignments: Add group-> GroupA -> Create
 Assign Licence using admin center -> Got to admin Center -> BIlling -> Licences -> Select P2 licence -> Go to Groups -> Assign Licences -> Select Group A -> Select Assign.
-**Self Service Pasword Reset (ability to reset password themselves)
+
+****Self Service Pasword Reset (ability to reset password themselves)
 If user forgot pasword then use this feature..
 -> Needs MS ENtra premium P1 Or P2 licence
 -> Diff authentication methods
 Notification: Notify users when password is reset.
 
-
-
-TR
-TO
-LAB: Entra
-All Users -> UserB with Licence P2 -> Go to default Directory -> Password Reset -> Properties -> "Selected" (None/Selected/A11) -> Select Group -> Save. Go to Authentication Methods -> Email, Mobile phone, Security Questions -> Go to Registration ->
+LAB: 
+Entra - All Users -> UserB with Licence P2 -> Go to default Directory -> Password Reset -> Properties -> "Selected" (None/Selected/A11) -> Select Group -> Save. 
+Go to Authentication Methods -> Email, Mobile phone, Security Questions -> 
+Go to Registration ->
 Go to Notifications ->
+
 How to reset Password ?
 Login to portal as the user e.g. USerB --> then it will say "More Info required" -> Add phoneNo with code, Next -> default sign in and done "Forgot my password" select -> then Reset Password page will open -=>
+
 ***Resource Tags
 Resource groups helps to logically group resources. If u want to filter costs based on resource group that is also possible.
+
 You can add tags to resources, this is extra metadata added to the resources. It just gives an extra way to organize resources. Even from a billing aspect you can filter resources based on resource tags.
+
 Go to "Cost Management" -> Cost analysis -> Accumulated Costs -> Add filter as Tag ->
+
 **Moving resources across resource groups
 Create resource group -> staging-grp1 -> UK south location -> create
 Go to public IP address -> RG (Move) -> select "move" option -> select new RG -> Next -> Validation -> Move -> location will not change, all we have done is changed RG name.
+
 ***Moving resources across subscription
 Create new subscription -> Select subscritions -> Add ->
 VM -> Subscription (<a>Move</a>) -> Select Move -> select new subscription -> Failed -> coz need to move the dependednt resources as well. First disassociate the public ip address.
 GO to resource grp -> move -> MOve to another subscription -> Next -> Validation Complted -> SUCCESS.
+
 **Locking Resources (to protect infrastructure)
 We can lock subscription, RG, resource to protect them from accidental user deletions and modifications. 2 types of lock -> CanNotDelete, ReadOnly I
-Go to VM(WebVM01)->Settings -> Locks -> ADD -> LockTvne:Delete. Name: Deletelock -> OK
-
-
-
-
-
-.
-7
-}
+Go to VM(WebVM01)->Settings -> Locks -> ADD -> LockTvne:Delete. Name: Deletelock -> Ok
 Go to VM(WebVM01)->Settings-> Locks -> ADD -> LockType:Delete, Name:DeleteLock -> OK
 And try to delete resource -> it will show error coz of lock
 212...217
+
 ***Lock & Moving resources ->
 create a new RG -> as "new-grp" -> UK South
 Define ReadOnly lock on above RG.
 Go to the "VirtualNetwork" -> Move -> MOve to another RG -> It is failed -> Coz Destination RG is locked.
+
 **Azure Advisor
+
 **Azure Policy Service -> Helps to govern our resources. You can define rules that resources need to comply by. e.g. company wants VM's to be constrained to a particular region.
 You can use in-build policies or define ur own policies.
 LAB: Policy service -> Overview -> Definitions -> different in-build policies in place.
@@ -120,6 +136,7 @@ Select Policy -> Assign Policy -> Select the SKU -> Next -> Create
 Go to Assignments -> Delete Assignment -> Yes
 LAB 2 :"Not Allowed resource types"
 Go to Policy -> Select above policy -> Assign policy select ->
+
 ** Momt Grps -> helps to manage diff subscriptions
 Roles can also be assigned at Managemtnt group level.
 Azure policies on MG's.
