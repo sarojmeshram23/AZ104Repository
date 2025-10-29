@@ -88,11 +88,13 @@ Private IP addresess attached on Netwrok interface resource.
 Public IP address attached to Network intf.
 
 -> In Laptop, we have some sort of network card that will receive these ip addresses..
--> All of the traffic between machines going via network interface and hence private ip address attached to the network interface. public ip address is also attached to network interface as well. 
-but public ip address is a separate resource coz the public ip address is assigned to another machine as well.
+-> All of the traffic between machines going via network interface and hence private ip address attached to the network interface. 
+   public ip address is also attached to network interface as well. 
+   but public ip address is a separate resource coz the public ip address is assigned to another machine as well.
 
 Azure reserves first 4 IP addresses in each subnet address range.
 10.0.0.4
+
 Public Ip addresses allow internet based resources to communicate with azure resources in the network. 2 SKUs or pricing tier for public IP addes basic and standard.
 
 **Dynamic IP address -> Here IP address is only assigned when the public IP address is assigned to a resource. It is released when u stop or delete the resource. 
@@ -102,8 +104,6 @@ Now u would map this domain name map into this public ip address, now when users
 If this was a dynamic IP address, if u had stop the machine and start it again then dynamic ip adres released and new dynamic ip address is assigned. 
 if u have static IP address, and stop start machine the addr will not change.
 All the traffic between machines going via network interfaces.
-
-LAB: -> Go to VM -> Networking 
 
 LAB -> GO to VM -> Networking -> Network settings -> We hv N/w interface, public ip addr, private ip addr.
 Go to N/w interface -> which is a separate resource -> settings-> IP configurations-> ipconfig is attached to N/w interf
