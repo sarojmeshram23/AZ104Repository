@@ -1,1 +1,145 @@
 
+Azure Storage Service -> This is a storage on Azure cloud for your blob objects, files share, queues, and tables.
+(4 types) of services
+1. Blob
+2. Azure Files
+3. Queue
+4. Table
+
+Blob-> Storing large amount of unstructured data. Suitable for storing images, documents, video & audio files. 
+File Share -> Here, u need to maintain the file server, and ensure enough storage is in place.
+             Instead u can create file shares using Azure file share service. Here the storage is managed for you.
+             ->u can create File Share and start uploading your files. 
+              u don't need to manage underlying infrastructure. 
+Queue -> If messages need to be shared across multiple application components. Here u need to have the message software and maintain it.
+        Here u can create storage queue, and then u could have "one component" of your application send messages on the queue and then another component having the 
+        ability to receive the messages, a very simple messaging service.
+Table service -> If ur application needs to store data like non-relational structured data, like data about your users.
+
+Standard General purpose V2-> have access to all types of storage account.
+NOTE: When we need to create Azure data Lake, then we can use Blob storage service.
+
+premium Block blobs -> Faster access on block blob
+
+Blob types -> BlockBlob, AppendBlob, Page Blob.
+LAB -> Upload files in block blob -> select the file -> Edit -> Save
+
+Quw. How to enable public access for the container ?
+=> Go to container -> Change access level -> Could not do anything as it is disabled.
+-> Go to Storage account -> Settings -> configuration -> Allow Blob Anonymous access -> Enabled -> SAve
+Now again -> Go to container -> Change access level -> now this is enabled ->BLOB (Anonymous read access for blob only) -> Save.
+
+***Different Authorization Techniques ->
+1. Anonymous access at container level. (not most secured)
+2. Giving access via use of access keys. (Not recommended, Its like a password allows u to connect on to StorAct. give access to all of data/services within StAcc.
+Blob, table, queue.file)
+3. SAS (Shared Access Signatures). [more secured way, u can put more restrictions on the access itself.]
+4. Using MS Entra ID as idetity provider.
+
+****Azure Storage Explorer****freely avai tool
+If users don't need access to services within Azure, they only need access to data, then u could give client tool, k/as Azure Storage Explorer.
+
+****Using Access Keys
+How to get Access Keys ? => SA -> Security - Access Keys
+If something goes wrong in usage of key1,
+Rotate key -> This will invalidate what was the value of key one and generate a new key itself.
+
+ConnectionSring-> This is used to actually connect from the program to ur StorAccount.
+
+LAB -> Go to Sorage Explorer tool -> rt click storage Account -> connect -> connect on StoaAcc -> ConnectionString, SAS, AccName&Key -> Selet AccName&Key -> 
+       Add account Name, access key -> Connect.
+-> This will give u complete access to data from StorageAccount.
+-> Have ability to Upload and delete data, gives complete access using access keys.
+LAB for MacOS system -> Go to Storage Explorer tool -> sign in withAzure -> and u are able to access subscriptions and storageAccount data.
+****SAS-BLOB level
+LAB -> Go to File in BLOB -> Generate SAS -> Generate SAS Token & URL (Based on parameter it will generate known as a token.This token used to now access this blob securely. Here u can add permissions as part of the token, also can add start and expiry, it means if u try to use token after expiry date, u will not gain access to the blob. Also can add Allow IP addresses from where the call is being made to access the blob. Click on generate SAS & URL. And u can see
+1. Blob SAS Token
+2. Blob SAS URL.
+--> Take SAS URL, go to browser and u will be able to access the file.
+****SAS-Container level
+Go to Container -> On LHS -> Select Shared Access Tokens -> Generate SAS Token & URL
+
+
+****SAS-Container level
+Go to Container -> On LHS -> Select Shared Access Tokens -> Generate SAS Token & URL
+The SAS URL can't be accessed from browser here coz browser can't unerstand how to access container at an individual level. so we can use storage explorer.
+Go to Storage Explorer -> rt click on Storage Account -> Blob container -> SAS URL -> (Permissions:Read, list are required to see the files from container) -> Next->
+connect.
+****SAS-StorageAccount level
+Go to StACC -> Security ->SAS -> Generate SAS and Connection string.
+Go to Storage Explorer -> rt click on Storage Account -> Select StorageAccount or Service -> SAS -> next -> paste url in string -> Connect
+**Quel. Find the least permissions required for a Shared Access Signature to just enumerate the blobs in a container, working with below small config.
+-> AllowedServices: Blob, Allowed resource type:Container, AllowedPermission:list.
+****Stored Access Policy****
+provides additional level control over SAS. -
+[ Under Stored Access Policies -> Add Policy -> Add details -> Save]
+Go to container -> settings -> Shared Access Token ->Condition:Stored Access Policy -> None(as of now).
+Scenario: SAS has gone into wrong hands, u have to invalidate SAS, link it on stored access policy. coz once u generate SAS Token & URL, any user who has got access to the token. Link it to the "Stored Access Policy".
+Go to container -> Settings -> Access Policy -> Add Stored Access Policy -> Add Policy-> Identifier (Name): PolicyA, startTime ExpiryTime, Permissions -> Save
+Go to Shared Access token -> Add Policy -> Now the permission, Start&Expiry Time is disabled coz these are as per what we defined i policy -> Generate Iooken- Go to Storage Explorer -> Storage Acc -> rt cilk -> connect blob container -> Select SAS -> Connect -> visible container Data
+If SAS URL goes into wrong hands then we can't do anything coz withURL everything is already embedded, but we can edit the policy -> remove permissions -> OK -> Save Now the container data is not visible here.
+****Immutable BLOB storage:containers
+
+****Immutable BLOB storage:containers
+This allow u define a policy where in u can get read access to data but u can not be modify the data. reat: For particular timeframe objects (temporary hold) can be read by they can not modified.
+GO to container -> settings -> Access Policy -> Immutable Blob storage - Time based retention policy.
+***Data Redundancy
+This we can see when we create StoAcc. How drable ur data that u stored on StorAcc. Availability. if storage unit goes down. store data in Data center. Azure maintain high availability of data.
+LRS -> 3 copies of data made in single DC. if one copy not available other is available.
+GRS -> if DC goes down then u don't have access to ur objects. Here data is replicated synchronously across three azure availability zones in the primary region e.g.
+eastus.
+ZRS-> If entire region goes down then availability zones are not available. 3 copes of ur data are made available to a single physical location in the primary region using LRS. and 3-copies of ur data are made to single physical location in secondary region using LRS. Now data is available in 2 regions. Note -> Here chare is hig, as data copied from primary region to sec region.
+GZRS -> Here data is replicated synchronously across three azure availability zones in primary region. 3-copies of ur data are made to a single physical location in the secondary region using LRS.
+****Storage Redundancy
+StoraAcc -> Data management -> Redundancy -> Change the redundancy option -> save
+*Access Tiers - Hot, cool, cold, Archieve
+In Blob storage StorAcc.
+Pricing--> charge as per each gig store in SA.
+PREMIUM - faster access to ur data. that has separate storage cost.
+HOT
+COOL COLD
+ARCHIEVE
+Company uploading images on azure SA, during 1st week, images are being accessed frequently. and after a week images are not accessed/used at all. still eating up
+cost.
+Hot(default tier)-> this is optimized for objects that are accessed frequently.
+Cool -> This is ideal for obiects that are infrequently accessed. Here obiects need to be stored for minimum of "30 days". The storage cost is less as compared to hot.
+
+Cold->ideal for objects rarely accessed or modified, but u still need to access them. Here objects needs to be stored for minimum 90 days. Here storage cost is lower as compared to COOL access tier; but access cost higher. Archive -> ideal for objects rarely accessed. data stored for a minimum of 180 days.
+Storage Cost: Hot > COOL > COLD > Archive
+Access COST: Hot < cool
+**** *LAB:Access Tier
+StorAcc -> Settings -> Configuration -> "Blob access Tier": Hot, Cool -> changing it to COOL -> SAVE
+1) Containers -> Existing Object's access tier now changed from HOT to COOL -> Now make the change as prey from COOL to HOT -> save (if u have object in container these need to be their for particular perioed if changed access tier then need to pay some cost for change.)
+2) GO to objects -> change tier -> least storage cost is archive ADD-> if changed to archive -> then we can not download/retriey the file. -> to access this file again we need to change its access tier -> from archive to Hot, rehydrate property: Standard-> this will take time.
+****Lifecycle Policies
+SToAcc-> Data Mngt -> Lifecycle Mngt (List View, Code View) -> Add a rule -> Name: RuleA, Apply rules on all blocks -> next add condition -> if blobs not accessed from last 14 days then "Move to COOL storage" -> ADD.
+Condition conatins: Last Modified, Created.
+NOTE: "Last Accessed" is not visible. TO make it visible for this TICK "ENABLE ACCESS TRACKING"
+Add ruleB -> Next -> last accessed -> 14 days -> move to cold storage -> Next -> filter set -> Blob Prefix:scripts/ (it means rule applies to only scripts container) -> ADD
+3) 2 rules based on same condition Lats accessed time for 14 days -> 1 rule cool storage and other move archive storage -> least expensive operation prefced. NOTE -Action delete is cheaper action than tierJoArchive, Action TierJoArchive is cheaper than TierIoCool.
+****Lab : Object Replication
+Here objects can be replicated synchronously between source to destination storage account.
+Storage and destination storage acts: General purpose v2 or premium block blob accounts. Blob versioning needs to be enabled.
+Source Sto ACC->change feed is enabled.
+
+Azure Securi Az 3.0
+AZ104 Quer New Ti⚫
+MVC 1. ⚫
+Today.txt
+File Edit View
+Today. ⚫ News11.bxt News.but H1 ✓ E V B IGAB
+Extras.txt
+Exam AZ-104 PAwa * *
+Source Sto ACC->change feed is enabled.
+LAB: create Dest StoAcc -> Data Protection-> TICK enable versioning for BLOBS, -> CREATE.
+Got to source StAcc -> Data Memt -> Data Protection -> TICK Enable versioning for Blobs, TICK enable blob change feed -> save
+Got to source StAcc -> Data MGMT-> Object Replication -> create replication rules -> Select Destinition StAcc, source container:scripts, Dest container:scripts,copy cover: everything, -> Save (it will take time 1-2 min)
+Go to Dest -> Go to container -> create container -> crips -> Save
+****BLOB snapshots
+A snapshot is a read-only version of a blob that's taken at a pont in time.
+
+
+
+
+
+
