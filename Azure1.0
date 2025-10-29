@@ -197,5 +197,129 @@ U can share the azure compute gallery across ur organization so that other users
 -> In Specialized VM Images. information about specific users & machine info is retained whereas with Generic VM images information is removed. 
 
 
+2 types -> Generic VM Image and specialized VM Image
+-> In Specialized VM Images, information about specific users & machine info is retained whereas with Generic VM images information is removed.
+-> In Specialized VM image, new VMs will have the same computer name and admin user information whereas with generic VM image, we need to perform process of generalization, after this the original VM will be unusable.
+LAB1 VM create with IIS running on the machine and default.html page.
+GO to VM -> select "Capture" -> create an image -> Yes, share it to gallery -> Target Azure compute Gallery: Create New -> CompanyGallery -> Specialized image -> Target VM Definition: Ok -> Add version number -> Create.
+LAB2: Using Specialized Image->
+Go to VM -> Image: See all images -> Select Shared images from LHS -> could not mention username & password (option is not provided) -> same VN is provided -> Allow traffic on HTTP: port 80 -> Create.
+LAB3: Create Generalized Image (all of hardcoded attribute comp name, uname, paswd are removed)
+Follow certain steps -> Login to VM -> delete Panther directory(c:\windows\Panther), Go to regedit -> check key: start:1, -> Execute command -> shutdown machine. Go to VM --> Capture image -> Select Compute Gallaery -> Generalized image -> Create Target image definition -> add version number -> create
+LAB4: Create VM using marketplace recently created
+Create VM -> ad VM name -> add username & paswd -> Network already in placed -> create
+***Proximity Placement Groups
+(least latency:VM located closed to each other.)
+When we create multiple VMs as part of VMSS, then machines could be located in different DC's. Which physical host which host doesnot have uc control. Sometimes an applicatio wants the ultile VMs to be located closed together to get least latency when it comes to communication between the VMs.
+By placing the Vms as part of proximity group, the VMs will be physically located close to each other.
+Create Proximity Placement Group -> create
+Create VM -> Advanced -> chose Proximity placement Groups -> create.
+***Deployments
+[ Can see history of deployments.]
+RG -> Settings -> Deployments -> All deployment against this RG -> get details of deployment -> and also redeploy.
+** Azure Web Apps
+***Deployments
+[ Can see history of deployments.]
+H1
+E BIG AD
+X
+RG -> Settings -> Deployments -> All deployment against this RG -> get details of deployment -> and also redeploy.
+** Azure Web Apps
+Once u have IIS web server on machine, then u can deploy ur code(.net application) in the machine.
+Another web service i.e. web app. This is managed service, here the VM & physical infrastructure is managed for you. There is support for web applications based on .NET, Java, Node.js, PHP, Python. Here the patching of the framework & the OS is managed by the service.
+[ Dont install ISS web server only deploy web app whole virtual infra is managed for you. Automatically get high availability. dont want burden of managing VM then use web app.]
+-> But if u need to host a custom application that needs to be installed, then you would probably need to use the Azure VM service.
+I
+Lab: Azure Web App -> Select Web App -> Publish: Code, RuntimeStack: .Net8 (LTS), OS: Windows, (need compute machine to host application), AppServicePlan: FreeF1,-> Monitor+Secure -> Enable Application Insights: No -> Create {.net is installed}
+**Making simple changes to web app
+{Create HTML file in Web app}
+Go to Web app -> Devt Tools -> App Service Editor -> Open Editor -> wwwroot/ create a new file default.html -> Inside Default.html add -> <h1>This is web application</h1> -> Saved automatically -> refresh the DNS name -> and u can see the contents from default.html
+*** App Service Plan
+This will give u required infrastructure for hosting web app.
+Free F1 -> 60 mins/day to access azure web app. Here shared infrastructure.
+Click on pricing plan -> Hardware View and Feature View-> Dev/test, Production (premium), Legacy (Premim, Standard). We can host another web app on the same app service plan.
+**Azure Web App - Deployment Slots [Production web slot, Staging web slot]
+prod based application that published on web app. users are using it. you have revision new features, bug fixes. newer version that needs to be published. Test the application. Now u can't publish this inside web app because u have production version there. u have to publish newer version somewhere else so the user can test newer version of application.
+What we can do ?
+1. create a new web app
+2. Deploy the newer application
+3. test the application
+3. test the application
+4. Publish the application after successful testing to the primary azure web app.
+Instead of this, we can make use of deployment slots. This feature is available with Standard, premium and isolated App Service Plan.
+Main application is deployed on production slot, u can create STAGING web slot withing web app itself and publish newer application. Eaach slot is live web application with its own host name. once testing is completed, u can perform swap.
+Then at any point in time, u can swap the slots. So that the newer version of the application runs as part of the production slot. This helps in first testing of the application in the staging slot & then swaping the slots at any point in time.
+It also helps in recovery from failure. If the swap succeeds, but the newer version of application is not working, u can easily swap back at any point in time.
+**Lab
+Go to Web app-> Deployment -> Deployment Slot -> This is required premium or standard service plan. so change the app service plan. -> For this go to settings -> Scale Up Plan -> Select Standard S1 -> Upgrade. (check in overview section for new plan)
+Go to deployment -> Deployment Slot -> Add Slot -> Name: staging, -> Add. (adding another web app instance within the same web app itself)
+Go to deployment -> u can see two slots -> open staging in new tab -> like another resource in place.
+How to perform swap ?-> Go to deployment slot -> Select SWAP -> Start swap.
+65- 80 ->, Containers
+**Autoscaling for web app
+with basic app service plan or higher, u have dedicated machines that can be used to host ur web app.
+U wanted to host multiple azure web apps with same app service plan. Basic App Service plan, u can have a maximum of 3 virtual machines running ur azure web aps. Scaling -> 1 machine as app service plan, manually scale infra from 1 to 3 machines. cost is higher.
+On demand -> available with standard plan. max 10 machine and add rule.
+Basic App Service plan, u can have a maximum of 3 virtual machines running up azure web apps. machines are used to host web application. Standard plan-> configure auto scaling based on rules. max 10 machines.
+Premium plan > configure automatic scaling based on traffic.
+Go to web app -> settings -> Scale out -> scale out method: manual (based on traffic)/rule. -> Rule based -> configure -> custom auto scale -> scale based on a metric -> add a rule -> ..
+66 to 80
+15 sessions -> 4 hours.
+**The need for containers
+Host container based applications.
+Docker -> tool/technology for creating & deploying container based applications.
+VMs runs on physical servers, Host OS on physical server, virtulato for hosting VMs, Hosting applications on VMs. VMs is isolated from each other.
+"Problem" -> Developer devp app on their local machine. deployed on VM then it does not work as intended. This could be coz of differences in machine software configuration, libraries not present etc.
+2 applications on same machine. Both application on same VM.
+To address this issues, we have container. "This is a unit of software that packages up all the code and dependencies that are required for the application to run." Ur application run in isolation within its own container, It has required underlying OS, read libraries, and configuration to run the application. u can run multiple applications on same VM. coz they run in isolation coz each application has its own container.
+Each container has => Underlying OS + Libraries + Configuration
+***Deploying Docker on a VM ->
+[If u wanted to host a web application on VM, we could first need to install a Web Server & then host our web application.] (first install Docker toolset on VM, )
+LAB: Deply VM -> connect VM -> login -> Install all pre-requisites for docker toolset (command list get from internet & execute) -> install Docker. ***Running the nginx container on the Linux VM
+sudo docker run nginx -> (On docker we have marketplace nginx image) check nginx docker based image, if not found locally then the download from dockerHUB. Request to VM -> thenDocker.
+***Image Registry
+Create a resource based on azure container registry.
+Need of service ? ->
+1. There are readymade images available on Docker Hub. Docker image is taken from Docker Hub. DockerHub is an online registry that's available that has all of the images that are published by different vendors in marketplace. 2.U can use these images to run conatiners.
+Fille
+View
+3. We have our application, then create something known as build, a runnable version of application, and then package it as a docker based image (use docker to first create an image that would contain or application). Once image is placed then we can run a container out of that image and hence run the application. 4. Azure container registry
+{create build, package it to docker based image, run a container out of image}
+Lab:1. Go to marketplace -> create container registry -> Name, pricing plan:std -> create.
+This is ur private registry which u can use for hosting ur docker based images.
+2. Go to registry -> services -> Repositories -> u can see here docker based images -> no images as of now. 3.Settings -> Access keys -> enable
+*** Containerize your application
+ex. how u can containerize ur own application within docker based image, and then run it as a container.
+code.visualstudio.com -> run VS code
+**Container instances service
+create instance -> select azure container registry ->
+80 to 148
+Container
+Services that help us host container based application.
+Docker -> creating and deploying container based application/workload. Multiple applications on same VM itself.
+Problem with VM ? -> 1. When u deploy ur application on VM then they does not work as intended (Actual laptop dev is using and the VM which host the application). This could be coz of machine difference and libraries not present.
+2. two application on the same machine. one application requires a library/component to be installed. This causes other application to stop working.
+To address this problem, we have containers.
+Containers -> It is unit of software that packages up all the code and dependencies that are required for the application to run.
+Fach container runs in isolation.
+Container = configuration + libraries + OperatingSystem -> all are lightweight.
+LAB -> Deploying Docker on VM.
+Install docker on VM. and just issue simple command to container in place.
+1. DEPLOY Linux VM.
+2. Install Docker for hosting containers.
+Simple Scenario :- If u want to host web application. then first install web server, and then host our web application.
+Host nginx web server via docker based container.
+Step 1. Install Docker toolset on azure VM.
+2. download image(template). Docker based images k/as Docker HUB.
+3. and then run container out of that image.
+Lab 1. Deploy Linux based machine. Standard B2s
+2. Install Docker on machine itself.
+
+
+
+
+
+
+
 
 
