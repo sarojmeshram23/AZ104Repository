@@ -36,6 +36,36 @@ first 24 bits of the IP Address to be the network ID, and the last octet represe
 IP address is used to represent a device on a network. An IP address is representation of 32 bits (8bit.8bit.8bit.8bit/octet.octet.octet.octet). u need to segregate uc IP address based on a network Id and a host ID. 
 first 24 bits used for network id to uniquely identify a network and last 8 bits represent host within the network.
 
+Network ID (24 bit) + Host id (8bit)
+We can represent the network using CIDR block. 
+192.168.50.0/24
+
+***Virtual networks
+VM needs to be deployed on to a Virtual network. Virtual network is an isolated network on the cloud.
+This is similar to having network on on-premise data center. then u can deploy ur resources onto this network like ur azure VM.
+
+VN -> 10.0.0.0/16
+subnet -> 10.0.0.0/24
+
+LAB1 - Create a virtual network,
+
+**** Create Virtual Network
+10.0.0.0/16-> address space for virtual network
+What does this mean? first 16 bits 10.0 is network id and next 16 bit 0.0 is host id. last /16 bits means 655,36 available ip addresses that can be assigned onto "resources" deployed onto the virtual network.
+10.0.0.4 10.0.1.4
+
+As part of VNet, we also need to define subnet, so u can segregate ur workloads within ur vnet via use of subnets. subnet also has IP address range. This IP address is subset of ip adder range of vnet. 
+ur resource ur vmachine deployed on to this subnet. 
+after deployment of Vnet, u can see additional ip address and subnet can also be added to VNET.
+
+Virtual Network (IP Adrees)
+   |           |       |
+Subnet       Subnet. subnet
+VMachine.    Db
+Workload.    Workload
+***Concepts of subnet
+we can define multiple subnet as part of VNET. Subnet actually helps segregate ur workloads within VNET. We can have the WebServers (workload) located in one subnet & DB servers located in another subnet..
+Users don't need to connect to DB servers, the web servers internally connect to DB servers.
 ***Concepts of subnet
 we can define multiple subnet as part of VNET. Subnet actually helps segregate ur workloads within VNET. We can have the WebServers (workload) located in one subnet & DB servers located in another subnet.
 Users don't need to connect to DB servers, the web servers internally connect to DB servers.
