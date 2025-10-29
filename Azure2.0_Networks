@@ -1,37 +1,41 @@
-H1 v
->
-BIG AD
-public ip address, virtual network, NSG, NI, Azure Bastion, load balancer, DNS, Monitoring
+public ip address, virtual network, NSG, NI, 
+Azure Bastion, load balancer, DNS, Monitoring
+
 Doubts ?
 subnet -> subset of ip addres
+
 **IP Addresses
 e.g. 192.168.5.1 -> these numbers are representing binary values. Binary values can only be either 0 or 1.
+
 0000 -> 0
 0001 -> 2
 0010 -> 4
+
 Octet -> 8 binary values together
-Number of possible values -> if u have only one binary value, it can either be 0 or 1.
-if u have two binary values, it cab be 4 possible values -> if u have three binary values,-> 000, 001, 010, 100,
-00, 01, 10, 11
-0 1 1
-0
-0 0
-0
-4
+
+Number of possible values -> 
+->if u have only one binary value, it can either be 0 or 1.
+-> if u have two binary values, it cab be 4 possible values -> 00, 01, 10, 11
+-> if u have three binary values,-> 000, 001, 010, 100,...
+
+0   0  1  1  0 0 0 0
 128 64 32 16 8 4 2 1 -> Place values => 32+16 => 48
-An ip address is 32 bit number, here u have 4 octets of binary values separated by periods. (OneOctet octet octet octet)
+
+An ip address is 32 bit number, here u have 4 octets of binary values separated by periods. (OneOctet.octet.octet.octet)
+
 11000000 192.
 10101000 168.
 00110010 50.
 00000001 1
-We represent IP addresses as numbers because it is easy to read. Every device on a network actually gets an IP address. It helps to identify device on the network even at home up wi-fi router that connects to the internet. it also forms a network at devices at home, so your router will actually have its own IP address. it will then assign IP addresses onto the devices that are connected onto the router.
+
+We represent IP addresses as numbers because it is easy to read. Every device on a network actually gets an IP address. It helps to identify device on the network even 
+at home up wi-fi router that connects to the internet. it also forms a network at devices at home, so your router will actually have its own IP address. 
+it will then assign IP addresses onto the devices that are connected onto the router.
+
 first 24 bits of the IP Address to be the network ID, and the last octet represent the host within ur network. u can have a network mask of 255.255.255.0
-IP address is used to represent a device on a network. An IP address is representation of 32 bits (8bit. 8bit. 8bit.8bit/octet.octet.octet.octet). u need to segregate uc IP address based on a network Id and a host ID. first 24 bits used for network id to uniquely identify a network and last 8 bits represent host within the network.
-File Edit View
-IP Awa
-Mind (
-Interview C Azure X
-H1 EV BIG A
+IP address is used to represent a device on a network. An IP address is representation of 32 bits (8bit.8bit.8bit.8bit/octet.octet.octet.octet). u need to segregate uc IP address based on a network Id and a host ID. 
+first 24 bits used for network id to uniquely identify a network and last 8 bits represent host within the network.
+
 ***Concepts of subnet
 we can define multiple subnet as part of VNET. Subnet actually helps segregate ur workloads within VNET. We can have the WebServers (workload) located in one subnet & DB servers located in another subnet.
 Users don't need to connect to DB servers, the web servers internally connect to DB servers.
