@@ -36,9 +36,13 @@ The VM costs minute basis. NSG no charge. VN is freee of charge. ip address and 
 VM Sizes => Diff series available based on ur reqt. LOW cost: Bs Series, Gen purpose:D Series, more power: F series. 
 At the EOD u can stop the machine or delete the resource for cost saving.
 
-** create LINUX based machine, connect -> "Native SSH" is used to connect to LINUX VM. shows command to connect on cmd prompt > ssh username@publicIPAddress
+** create LINUX based machine, connect -> "Native SSH" is used to connect to LINUX VM. 
+shows command to connect 
+on cmd prompt > ssh username@publicIPAddress
 Putty is also used to connect Linux VM. Download putty tool,
 sude apt install nginx
+
+*****
 Subscription -> Usage + Quotas ->
 
 *** Disk (05 disk, Data disk)
@@ -48,25 +52,34 @@ Standard SSD (Solid state drives)
 Premium SSD
 Premium SSD v2
 Ultra disk -> high cost
+
 Azure Managed Disk -> These r block-level storage volumes that are managed by azure.
 U can create and attach disks to machine either during launch of machine or after the machine is created.
 Each VM will come with an OS disk. This will have OS installed on it. u can create additional Data disks and attach it to VM.
-A machine can also get temporary disk. The size depends on the machine size. The data on this disk can be lost during maintenance event, or when u redeploy a VM or when u stop the machine.
+
+A machine can also get temporary disk. The size depends on the machine size. The data on this disk can be lost during maintenance event, or when u redeploy a VM or 
+when u stop the machine.
 
 **Adding Data disks
 We can do this while creating VM or after creation of VM.
+
 Add data Disks.
-Connect VM -> Server manager -> File and storage Services -> select Disk -> Right click on newly created Data disk and Initialize, Next step is "New Volume" to the same -> then u will be able to see Data disk in partition.
+Connect VM -> Server manager -> File and storage Services -> select Disk -> Right click on newly created Data disk and Initialize, Next step is "New Volume" 
+to the same -> then u will be able to see Data disk in partition.
 
 Data disk; Temporary disk ->
+
 Stop the VM(deallocating the VM -> deallocating from physical host, no capacity on physical host, )
 Start the VM(same physical host or diff)
 Connect VM -> lost data from Temporary disk, Data disk persist.
+
 Shut down from machine -> partial shutdown -> not complete deallocate -> bear some cost, u will not lose data from temporary disk.
 
 ***Disk Snapshot -> read-only copy of Hard disk
 u can also create a new disk from the snapshot.
+
 How to create Disk Snapshot ? -> Go to the data-disk itself -> Select "Create Snapshot" -> like back up copy read only -> create -> go to resource -> create a disk using this snapshot.
+
 Attach existing disk to VM (VM -> Disks)
 
 ***Detaching data disk from VM is also possible.
@@ -82,9 +95,8 @@ U can use the azure key vault service to store the encryption keys that can be u
 2. KV->Access Control -> Add role assignment -> Key vault administrator to the current user -> Assign
 3. Generate Key inside AppVault
 4. Disk Encryption set on keyvault or using it
-Go to VM -> Detach data disk -> Go to individual Data disk -> Encryption -> Under Key management: select ur encryption set -> Save 5. Attach Disk to VM
-
-***Azure Disk Encryption ->
+Go to VM -> Detach data disk -> Go to individual Data disk -> Encryption -> Under Key management: select ur encryption set -> Save 
+5. Attach Disk to VM
 
 ***Azure Disk Encryption ->
 Go to VM -> Additional Setting and encrypt
@@ -95,12 +107,14 @@ This is useful if u want to run any task post the deployment of the VM.
 Ensure the script don't require any user input when they run.
 These run in background and These script is allowes 90 mins to run.
 E.g. Application needs to be hosted on machine.
-e.g.2. Earlier we saw how we could install IIS on machine. This is done manually. Now we r going to create PowerShell script file that will automate the installation of IIS. When creating machine we will use custom script extensions to pick up the powershell script file to perform cead installation.
+e.g.2. Earlier we saw how we could install IIS on machine. This is done manually. Now we r going to create PowerShell script file that will automate the installation of IIS. 
+When creating machine we will use custom script extensions to pick up the powershell script file to perform required installation.
 
 *** (Upload PS script file)
 Storage Acc-> Create ; create container; inside container upload file;
 (Now we have to automate this)
-create VM -> Select inboud port: HTTP(80), RDP (3389) -> Next -> "Advanced" section -> Extensions-> select extension to install -> custom script extention -> next -> Browse the file from container -> create.
+create VM -> Select inboud port: HTTP(80), RDP (3389) -> Next -> "Advanced" section -> Extensions-> select extension to install -> custom script extention -> next -> 
+Browse the file from container -> create.
 create VM.
 
 ***Azure Boot diagnostics
@@ -109,28 +123,39 @@ Better understanding why machine is not starting.
 
 ***VM: RUN command on existing machine -> Manually run
 Go to VM -> Operations -> RUN Command -> RunPowershellScript -> add Powershell script -> RUN -> (Here u can see the result of the script as well)
+
 import-module servermanager
 add-windowsfeature web-server -includeallsubfeature
 
 ***Redeploy VM
 Help -> Redeploy+reapply -> redeploy -> deallocate the machine and allocate to physical host.
 
-***Availability Sets (Fault domain, Update Domain) (in one DC) Redundancy options, High availability in place
+***Availability Sets (Fault domain, Update Domain) (in one DC) 
+Redundancy options, High availability in place
 E.g. E-commerce application, If VM go down (underlying infra has issues), azure do it best by providing redundancy option in place. Small downtime can cost severe impact,
-MS also needs to update the physical server, Security update to keep it secure. when they do update then restart required of physical server. then application. Avail of application, 2 or more machine same application, users goes to either server, (how traffic is directed is another thing) multiple machine hosting application, VM either diff or same physical server,
+MS also needs to update the physical server, Security update to keep it secure. when they do update then restart required of physical server. then application. Avail of application, 2 or more machine same application, users goes to either server, (how traffic is directed is another thing) multiple machine hosting application, 
+VM either diff or same physical server,
 goes wrong, both machines not available, one machine down then other available. can do with help of avaiABI set.
 Fault domain, Update Domains
+
 Failure could be
 1. Underlying infrastructure failed unexpectedly. network failure, local disk failure, rack failures.
-2. Planned maintenance events -> Wherein MS needs to make planned updates to the underlying physical envt. in such cases reboot might be read on uc VM. No additional cost for Availability sets.
+2. Planned maintenance events -> Wherein MS needs to make planned updates to the underlying physical envt. in such cases reboot might be reqd on ur VM.
 
-Availability Set -> This is a "logical grouping of machines" that helps to reduce the chances of multiple VM's going down because of hardware issues. TO make use of availability sets, u need to deploy a VM to an availability set. You can just create an Availability Set & deploy the machine to the set. The machine can only be part of a set when machine is created.
+No additional cost for Availability sets.
+
+Availability Set -> This is a "logical grouping of machines" that helps to reduce the chances of multiple VM's going down because of hardware issues.
+TO make use of availability sets, u need to deploy a VM to an availability set. You can just create an Availability Set & deploy the machine to the set.
+The machine can only be part of a set when machine is created.
 The VM is placed as part of fault & update domain in the availability set. so that they can't fail together.
-FAult Domain-> this helps to define a group of machines that share a common power source and network switch. You can have up to 3 fault domains. Update Domain -> This helps to signify the group of VMs and physical hosts that can be rebooted at the same time. You can have up to 20 update domains.
-FD0 FD1
-FD2
-UD1 UD2 UD3
-UD4 UD5 UD1
+
+FAult Domain-> this helps to define a group of machines that share a common power source and network switch. You can have up to 3 fault domains.
+Update Domain -> This helps to signify the group of VMs and physical hosts that can be rebooted at the same time. You can have up to 20 update domains.
+FD0   FD1   FD2
+ |     |     |
+UD1   UD2   UD3
+UD4   UD5   UD1
+
 **Availability Zones (no cost with AZ but there is bandwith cost) This is only to provide redundancy at infra level not data. Entire DC goes down, then we can use Avai Zones.
 An Availability Zone is a group of DC's. There are fast links across Availability Zones to ensure low latency. An azure region has multiple Avai zones.
 Diff DC.
