@@ -1,0 +1,94 @@
+File Edit View
+Azure IaaS services like Virtual Machines, Vnets and Storage Azure PaaS services like Web Apps and Azure SQL
+SaaS SaaS Services e.g. MS 365
+****Azure Services
+H1
+E BIG A
+Microsoft Azure provides cloud services for accomplishing various tasks and functions across the IT spectrum and those services can be organized into several broad categories.
+Compute and Networking Services
+Storage and Backup Services
+Identity and Access Management Services
+Application Services
+Data and Analytics Services
+Media and Content Delivery Services
+****Main components
+Compute
+Storage
+Networking
+Database
+Security Services
+(These services can be used to build, deploy, and manage various types of applications and workloads in the cloud.)
+What is Azure Resource Manager (ARM) and how does it differ from classic deployment model?
+Azure Resource Manager (ARM) is a deployment model in Azure that enables you to manage resources as a group, known as a resource group. ARM allows you to deploy, update, and delete resources in a coordinated and predictable manner, whereas the classic deployment model is an older deployment model in Azure that does not have these capabilities.
+Azure Subscriptions
+Azure is a subscription-based service. You need to sign up for using any service.
+You can purchase Azure through a number of different licensing options based on your business need. There are no upfront costs and you only pay for what you use. Deploying Resources
+Once you have your subscriptions in Azure, you will be able to deploy Resources like:
+
+ト
+Deploying Resources
+Once you have your subscriptions in Azure, you will be able to deploy Resources like:
+Virtual machine
+Storage account
+Virtual networks
+Services or any component that you will be managing.
+Azure offers two deployment models and multiple tools for you to be able to deploy and manage your resources.
+Azure Deployment Models
+1. Azure Service Management Model (ASM) using Classic Portal. This was the first approach that was introduced by Microsoft. Here the resources are coupled and can be deployed using ASM PowerShell Module.
+2. Azure Resource Management Model (ARM) using New Portal. The resources are decoupled and hence can be configured independently. JSON templates provide simple orchestration and rollback functions. They have their own ARM PowerShell Module as well.
+For example, while deploying a VM - compute, Vnet and storage resources are coupled in ASM, and hence can not be configured independently. Whereas with ARM, these resources are can be configured independently.
+ARM is the recommended model of deployment and in this course, we align to this model.
+*** Managing Resources
+Azure offers a number of tools that you can use to deploy, update or delete resources from your cloud solution. Resources can include virtual machines, storage accounts, virtual networks, services, or any component that you are managing.
+Here are the tools at your disposal to manage resources,
+Azure PowerShell
+ARM and ASM Portals
+Azure CLI
+Azure Rest APIs
+Azure SDKs
+*** Azure Powershell ->
+Azure PowerShell provides a set of cmdlets for managing your Azure resources and for Automating the scheduled task. Azure PowerShell Module can be installed in several different ways,
+From PowerShell Gallery (most preferred)
+Using MST installer from the GitHub repository
+
+From PowerShell Gallery (most preferred)
+Using MSI installer from the GitHub repository
+Using Microsoft Web Platform Installer
+In this course, we will cover the first two ways of installing PowerShell.
+** Preparing to Install
+Check if PowerShellGet is installed on your system using:
+>Get-Module PowerShellGet -list | Select-Object Name Version, Path
+(If PowerShellGet is not installed, download it by executing below command). Install-Module -Name PowerShellGet -Force
+Exit
+Once PowerShellGet is downloaded you are all set to Install PowerShell ARM or ASM modules. We will look into this, in next couple of cards.
+Administrative Privilege is needed to install the Azure PowerShell and Scripting environment must be enabled.
+***Install ARM Module
+You can install Azure Resource Manager (ARM) modules from the PowerShell Gallery using: Install-Module AzureRM
+PowerShell gallery is not configured as a Trusted repository. Hence you will be prompted to "Allow installing modules from PSGallery". Choose 'Yes' or 'Yes to All' to continue.
+Once installed, load the module in the PowerShell session using:
+Import-Module AzureRM
+Validate the installation by Checking the version of Azure PowerShell using: Get-Module AzureRM -list | Select-Object Name, Version Path
+What is Cloud ?
+-> Service models: SAAS, PAAS, IAAS
+SAAS e.g. Gmail, Salesforce.com,
+Essential Characteristics:
+On-demand self-service
+Essential Characteristics: On-demand self-service
+Broad network access Resource pooling
+Rapid elasticity
+Measured service
+The subsequent lessons take each one in turn.
+Deployment Models(procurement how u buy them):->
+Public cloud (AWS, Azure, GMAL, salesforce) - Everyone can use public cloud. Private cloud,
+Hybrid cloud,
+Community Cloud (bunch of org)
+IOT -> Internet of Things
+Cloud Def ->
+On-demand self-service => as needed automatically. DC's are automatically managed by cloud, I dont care where it is stored, I am just using it. Broad Network Access -> CApabilities are available over the network.
+Resource Pooling -> Multi-tenant, we know the location but other than this dont know anything. Rapid Elasticity -> provisioned and released, scale inward and outward, provision as how they like. Measured Service -> monitoring, controlling,
+
+
+
+
+
+
