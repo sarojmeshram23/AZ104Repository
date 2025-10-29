@@ -1,1 +1,60 @@
 
+Cloud is the new standard for hosting software systems. Attackers try to steal data from the cloud all the time. 
+Cloud possess its own set of security risks.
+
+End of course u will know
+1. security risk in the cloud
+2. how to make cloud services more secure
+3. security services the cloud offers.
+4. How to design secure cloud system from the ground up.
+
+Topics
+1. Basic Security Principles
+2. Security in the cloud
+3. Identity Security
+4. Network Security
+5. KeyVault
+6. Securing VMs, App Services, Databases, storage Account
+7. Firewalls
+8. Logging and Mounting
+9. Defender for Cloud
+10. Azure Policy
+11. Case Study
+
+What is software security
+1. Some1 logs into system with fake identity
+2. The system is attacked using DDOS (Denial of service)
+
+We protect against data loss, disruption of service, Data Leak, Data Inconsistensy.
+Data Loss -> Sensitive data is lost due to security breach is an attacker gains access to the main database and deletes records.
+Disruption of service -> The system activity is disrupted due to attacker's actions. (Attackers wants the system to stop working.) 
+Data Leak -> Sensitive data is stolen and made available to non-authorized recipients. e..Attackers gain access to the database & steal credit card information. 
+DAta Inconsistensy -> data is manipulated by non-authorized attackers and become inconsistent. i.e. Attackers impersonate as someone else & perform unauthorized actions.
+
+New terminology
+1. Threat -> An event, if happens, will lead to a security incident discussed earlier. E.g. SQL Injection, DDOS Attack,
+2. Attack -> An actual execution of Threat by an attacker.
+3. DDOS (Distributed denial of service) Attack -> special kind of attack used to overload sites and take them down.
+4. Vulnerability -> A problem in the system that can be used by attacker to execute an attack on the system, and make it compromised. e.g. MIsconfigured Firewall exposes internal systems to the public web.
+5. Authentication -> Establishing the identity of the user (human or not) based on reliable mechanism. e.g. User/Password, SMS, Biometric Identification 
+6. Authorization -> Establishing what a given user is allowed to do in the system.
+e.g. User X is allowed to create a new service request, but not allowed to delete an existing service request.
+
+Who is responsible for the security? Everyone is responsible.
+
+***Security challenges in Cloud
+1. Accessible to the internet
+2. Excessive Cost savings
+3. Misconfiguration
+
+The Cloud is fully connected to the internet. Clouds are being constantly attacked by private attackers, organizations, states.
+Excessive Cost savings :-> Pricing model in cloud is Pay as u go, clients pay only for what they actually use. In order to save money, many organizations compromise on security. 
+e.g. Client dont use web application firewall
+Don't utilize MFA
+don't configure private endpoints.
+
+Misconfiguration -> Some cloud services are open bydefault & need to be configured in order to make them more secure.
+e.g. App services accessible from all over internet bydefault. VM's - open to SSH/RDP from all IP's bydeault.
+It's easy to forget to configure these services to be secure.
+
+
