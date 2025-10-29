@@ -156,54 +156,46 @@ FD0   FD1   FD2
 UD1   UD2   UD3
 UD4   UD5   UD1
 
-**Availability Zones (no cost with AZ but there is bandwith cost) This is only to provide redundancy at infra level not data. Entire DC goes down, then we can use Avai Zones.
+**Availability Zones (no cost with AZ but there is bandwith cost) This is only to provide redundancy at infra level not data. 
+Entire DC goes down, then we can use Avai Zones.
 An Availability Zone is a group of DC's. There are fast links across Availability Zones to ensure low latency. An azure region has multiple Avai zones.
+
 Diff DC.
 
-
-News11.Ext
-News.bt
-View
-File Edit ***Availability Sets (Fault domain, Update Domain) (in one DC) Redundancy options, High availability in place
-BIG Ab
-E.g. E-commerce application, If VM go down (underlying infra has issues), azure do it best by providing redundancy option in place. Small downtime can cost severe Impact,
-MS also needs to update the physical server, Security update to keep it secure. when they do update then restart required of physical server. then application. Avail of application, 2 or more machine same application, users goes to either server, (how traffic is directed is another thing) multiple machine hosting application, VM either diff or same physical server,
-goes wrong, both machines not available, one machine down then other available. can do with help of avaiABI set. Fault domain, Update Domains
-Failure could be
-1. Underlying infrastructure failed unexpectedly. network failure, local disk failure, rack failures.
-2. Planned maintenance events -> Wherein MS needs to make planned updates to the underlying physical envt. in such cases reboot might be read on uc VM. No additional cost for Availability sets.
-Availability Set -> This is a "logical grouping of machines" that helps to reduce the chances of multiple VM's going down because of hardware issues. TO make use of availability sets, u need to deploy a VM to an availability set. You can just create an Availability Set & deploy the machine to the set. The machine can only be part of a set when machine is created.
-The VM is placed as part of fault & update domain in the availability set. so that they can't fail together.
-FAult Domain-> this helps to define a group of machines that share a common power source and network switch. You can have up to 3 fault domains. Update Domain -> This helps to signify the group of VMs and physical hosts that can be rebooted at the same time. You can have up to 20 update domains.
-FDØ FD1 FD2
-UD1 UD2 UD3
-UD4 UD5 UD1
-**Availability Zones (no cost with AZ but there is bandwith cost) This is only to provide redundancy at infra level not data. Entire DC goes down, then we can use Avai Zones.
-An Availability Zone is a group of DC's. There are fast links across Availability Zones to ensure low latency. An azure region has multiple Avai zones.
-Diff DC,
-****VMSS -> This service helps u to create and manage a group of load balanced VM's. "The number of VM's can then grow based on demand or on a schedule." (allows u to scale based on demand.)
-e.g. Ecommerce application, increase machines when load is high, when sale is lower then lower the machines. Manually increase and delete machines. Allows
+****VMSS -> This service helps u to create and manage a group of load balanced VM's. "The number of VM's can then grow based on demand or on a schedule."
+(allows u to scale based on demand.)
+e.g. Ecommerce application, increase machines when load is high, when sale is lower then lower the machines. Manually increase and delete machines.
+Allows
 Orchestration: Uniform, Flexible
+
 Uniform -> VM were managed by scaleset itself, could not see ind VM. could not see in the VM blade.
 Flexible -> Able to work with each Virtual machine independently; we can create a VM' using VMSS with Flexible orchestration.
+
 **VMSS -custom script
 Upload a script file in storage container.
 Create VMSS -> after complete deployment .
 Go to Settings -> Extenstions + Applications -> add -> custom script extension -> browse the script file -> select -> create
-[It will not apply custom script directly to VMSS. reason? coz multiple machine VMSS, u want to happen in gradual manner coz it could break the application.] For this, go to instances -> select all VMSS -> Upgrade -> SAve (now the script is getting execute on these machines).
+[It will not apply custom script directly to VMSS. reason? coz multiple machine VMSS, u want to happen in gradual manner coz it could break the application.] 
+For this, go to instances -> select all VMSS -> Upgrade -> SAve (now the script is getting execute on these machines).
+
 Check on Lab
+--------------
 1. Does VMSS has RUN Command Option
 2. Create Key Vault and use it.
+
 ***Virtual machine Images (create ur own image)
 Let's say that u have a Virtual machine that has an application in place and other tools and services as well.
 Now let's say that u want to create more VM's that has the same set of applications, tools and services.
 You could use custom script extensions to install the applications, tools etc. But it could take time to have the machine in place if the installation process takes time.
+
 "Instead you can build your own custom image and then create machines based on the image.
 ->The image can have a copy of the full VM that include the data disks."
 You can create an image and place as part of the Azure compute gallery.
 U can share the azure compute gallery across ur organization so that other users can create VM on the images from Gallery.
+
 2 types -> Generic VM Image and specialized VM Image
 -> In Specialized VM Images. information about specific users & machine info is retained whereas with Generic VM images information is removed. 
+
 
 
 
