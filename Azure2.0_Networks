@@ -77,20 +77,33 @@ Create VMachine -> Our Vnet is on Region:NorthEurope location, so if we want to 
 
 **About IP addresses
 VMachine has public IP address and also has private IP address.
-One subnet hosting WebServer & another subnet hosting DBServer. users accessing WebServer running on machine request from VM, for this u need to hv public Ip address. 
+One subnet hosting WebServer & another subnet hosting DBServer. users accessing WebServer running on machine request from VM, 
+for this u need to hv public Ip address. 
 Public IP address -> receive/accept request from the internet.
 
-Private IP address -> internal communication between VNet via private IP addresses. Private IP address allow communication across resources within a network. -> web workload/WebServer communicate to DB server via private IP address.
+Private IP address -> internal communication between VNet via private IP addresses. 
+              Private IP address allow communication across resources within a network. 
+              -> web workload/WebServer communicate to DB server via private IP address.
 Private IP addresess attached on Netwrok interface resource.
 Public IP address attached to Network intf.
+
 -> In Laptop, we have some sort of network card that will receive these ip addresses..
--> All of the traffic between machines going via network interface and hence private ip address attached to the network interface. public ip address is also attached to network interface as well. but public ip address is a separate resource coz the public ip address is assigned to another machine as well.
-Azure reserves first 4 IP addresses in each subnet address range. 10.0.0.4
-Public Ip addresses allow internet based resources to communicate with azure resources in the network. 2 SKUs or pricing tier for public IP addes basic and standard. **Dynamic IP address -> Here IP address is only assigned when the public IP address is assigned to a resource. It is released when u stop or delete the resource. **Static IP Address -> Here IP address is assigned when it is created itself. The IP address is released when the resource is deleted.
-I
+-> All of the traffic between machines going via network interface and hence private ip address attached to the network interface. public ip address is also attached to network interface as well. 
+but public ip address is a separate resource coz the public ip address is assigned to another machine as well.
+
+Azure reserves first 4 IP addresses in each subnet address range.
+10.0.0.4
+Public Ip addresses allow internet based resources to communicate with azure resources in the network. 2 SKUs or pricing tier for public IP addes basic and standard.
+
+**Dynamic IP address -> Here IP address is only assigned when the public IP address is assigned to a resource. It is released when u stop or delete the resource. 
+**Static IP Address -> Here IP address is assigned when it is created itself. The IP address is released when the resource is deleted.
 e.g. Lets say we have a web application hosted on VMachine, Now when users trying to access the application, they type DNS name (a user friendly name).
-Now u would map this domain name map into this public ip address, now when users typing url then translates to ip address then request goes to Vmachine. If this was a dynamic IP address, if u had stop the machine and start it again then dynamic ip adres released and new dynamic ip address is assigned. if u have static IP address, and stop start machine the addr will not change.
-.--
+Now u would map this domain name map into this public ip address, now when users typing url then translates to ip address then request goes to Vmachine.
+If this was a dynamic IP address, if u had stop the machine and start it again then dynamic ip adres released and new dynamic ip address is assigned. 
+if u have static IP address, and stop start machine the addr will not change.
+All the traffic between machines going via network interfaces.
+
+LAB: -> Go to VM -> Networking 
 
 
 
