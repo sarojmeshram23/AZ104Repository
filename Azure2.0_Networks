@@ -63,17 +63,23 @@ Virtual Network (IP Adrees)
 Subnet       Subnet. subnet
 VMachine.    Db
 Workload.    Workload
+
 ***Concepts of subnet
-we can define multiple subnet as part of VNET. Subnet actually helps segregate ur workloads within VNET. We can have the WebServers (workload) located in one subnet & DB servers located in another subnet..
+we can define multiple subnet as part of VNET. Subnet actually helps segregate ur workloads within VNET. We can have the WebServers (workload) located in one subnet 
+& DB servers located in another subnet.
+
 Users don't need to connect to DB servers, the web servers internally connect to DB servers.
-***Concepts of subnet
-we can define multiple subnet as part of VNET. Subnet actually helps segregate ur workloads within VNET. We can have the WebServers (workload) located in one subnet & DB servers located in another subnet.
-Users don't need to connect to DB servers, the web servers internally connect to DB servers.
-*** Deploying Machine to existing VNET CReate VNET
-Create VMachine -> Our Vnet is on Region: NorthEurope location, so if we want to VMachine to part of the same network then create Vmachine is NorthEurope location only. In Networking -> VNet: Existing VNet, -> Create
+
+*** Deploying VMachine to existing VNET 
+CReate VNET
+Create VMachine -> Our Vnet is on Region:NorthEurope location, so if we want to VMachine to part of the same network then create Vmachine is NorthEurope location only.
+                 In Networking -> VNet: Existing VNet, -> Create
+
 **About IP addresses
 VMachine has public IP address and also has private IP address.
-One subnet hosting WebServer & another subnet hosting DBServer. users accessing WebServer running on machine request from VM, for this u need to hv public Ip address. Public IP address -> receive/accept request from the internet.
+One subnet hosting WebServer & another subnet hosting DBServer. users accessing WebServer running on machine request from VM, for this u need to hv public Ip address. 
+Public IP address -> receive/accept request from the internet.
+
 Private IP address -> internal communication between VNet via private IP addresses. Private IP address allow communication across resources within a network. -> web workload/WebServer communicate to DB server via private IP address.
 Private IP addresess attached on Netwrok interface resource.
 Public IP address attached to Network intf.
