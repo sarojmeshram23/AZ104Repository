@@ -194,71 +194,87 @@ Add inbound sec rule -> source:ip address, source ip addr: 10.0.1.4, Desti: IP A
 NSG is actually attached to individual Network interfaces. We can also define NSGs at the subnet level.
 We can create new NSG group and associate that NSG with both subnets.
 We can detach NSGs at the network interface level so that one NSG associate individual subnet.
+
 Step 1 - Create NSG
 Step 2 - GO to NSG -> Add 5 Inbound rules on this NSG.
-Remove the exising NSG from both the machine and attach newly created NSG to both the machine (webym, appym)
+Remove the exising NSG from both the machine and attach newly created NSG to both the machine (webvm, appvm)
+
 ***NSG: Multiple NSGs
-Go to web NSG -> Settings -> N/w interfaces -> Attach new N/w intf -> webvm-linux-interf -> Goto IP addr over browser -> unable to connect to nginx server.
-File
-Edit
-View
+Go to web NSG -> Settings -> N/w interfaces -> Attach new N/w intf -> webvm-linux-interf -> 
+Goto IP addr over browser -> unable to connect to nginx server.
+
 u should have rules at both level to allow traffic.
-**NSG: Windows servers
+
+***NSG: Windows servers
 Deploy 2 windows machine one
 Not assigned public ip address.
-H1
-E BIG AD
-Lab -> Create VM1 -> While inside Networking Tab -> attach subnet: webVmSubnet -> public ip address -> NSG None -> Review+Create Create VM2 -> While inside Networking Tab -> attach subnet: appVmSubnet -> public ip address: None -> NSG: None -> review+Create
+
+Lab -> Create VM1 -> While inside Networking Tab -> attach subnet: webVmSubnet -> public ip address -> NSG None -> Review+Create 
+      Create VM2 -> While inside Networking Tab -> attach subnet: appVmSubnet -> public ip address: None -> NSG: None -> review+Create
+
 Connect to VM1 -> Facing issue GO to NSG -> Add inbound rule -> Soucr:My IP address, Destinition: IP Address (of windows based machine), Service: RDP, Action: ALIow, Prio:326,-> ADD
-**ASG (Application Security Groups)
-These helps to group VM together. Instead of allowing connections to individual machine in NSG's, we can allow access to Application Security Groups. -> Create an ASG, and associate the machines with ASG.
+
+***ASG (Application Security Groups)
+These helps to group VM together. Instead of allowing connections to individual machine in NSG's, we can allow access to Application Security Groups.
+-> Create an ASG, and associate the machines with ASG.
 -> Then in NSG, instead of mentioning IP addresses, we can use ASG to group VMs with same purpose and use them.
+
 LAB -> Create ASG -> Name: appnetGroup-ASG -> create
-GO to indivual machines -> N/w settings -> ASG configure -> ASG -> Add ASG select -> chose ASG -> Add Go to other VM -> N/w settings -> ASG configure -> -> ASG -> Add ASG select -> chose ASG -> Add
+       GO to indivual machines -> N/w settings -> ASG configure -> ASG -> Add ASG select -> chose ASG -> Add 
+       Go to other VM -> N/w settings -> ASG configure -> -> ASG -> Add ASG select -> chose ASG -> Add
 GO to NSG -> Source:IP Addresse, Desinition: ASG, Name: SelectASG name, -> Save (Here instead of mentioning ip addresses, we are mentioning ASG itself).
+
 ***Azure Bastion
 This is fully managed service that provides secure connections to VMs without the need of public IP Address.
 u can establish RDP and SSH connections to VM from the azure portal.
-Lab- Create empty subnet within VNetwork for azure bastion service. it is managed service. What will it do? deploy compute m/c in background then connect privately via private ip address.
-The subnet has to be name of AzureBastionSubnet.
-We disasoociate public ip address from VM.
-Also ensure that we don't have any custom NSG's attached to the network interfaces.
+Lab- Create empty subnet within VNetwork for azure bastion service. it is managed service. What will it do? deploy compute m/c in background then connect privately 
+     via private ip address.
+     The subnet has to be name of AzureBastionSubnet.
+     We disasoociate public ip address from VM.
+     Also ensure that we don't have any custom NSG's attached to the network interfaces.
 LAb -> GO to VM -> Go to VNetwork -> Go to subnets -> create new subnet that will be used by azure bastion service -> subnet purpose:AzureBastion, EnablePrivateSubnet: Untick -> ADD
-2) Inside VNetwork -> Select "Bastion" -> Select Configure manually -> name:app-bastion, Tier:basic, VNet:App-netwrok, public ipp addressname:, -> Review.create 3) Go to Ymachine -> disassociate Public Ip address from machine -> Go to public IP address -> Overview -> disassociate.
-40 Go to VM -> connect -> connect via Bastion -> Add uname & naswd -> connect 
+2) Inside VNetwork -> Select "Bastion" -> Select Configure manually -> name:app-bastion, Tier:basic, VNet:App-netwrok, public ipp addressname:, -> Review.create 
+3) Go to VMachine -> disassociate Public Ip address from machine -> Go to public IP address -> Overview -> disassociate.
+4) Go to VM -> connect -> connect via Bastion -> Add uname & paswd -> connect -> 
+(disassociate public ip address, Create subnet in VNet, Bastion configure manually)
 
+**Virtual Network Peering -> Each network is isolated network on cloud. -> [[this service allows u to connect virtual networks together]] 
+Yes different subnets with same VNetwork, Communication is possible. (diff machines same network-> communication possible.)
+Suppose we have 2 VNets associated with two VM's, and we want to communicate with these VM's then bydefault this is not possible. (Machines with different network-> 
+communication not possible)
 
-BI
-Ab
-4) Go to VM -> connect -> connect via Bastion -> Add uname & paswd -> connect -> (disassociate public ip address, Create subnet in VNet, Bastion configure manually)
-**Virtual Network Peering -> Each network is isolated network on cloud. -> [[this service allows u to connect virtual networks together]] Yes different subnets with same VNetwork, Communication is possible. (diff machines same network-> communication possible.)
-Suppose we have 2 VNets associated with two VM's, and we want to communicate with these VM's then bydefault this is not possible. (Machines with different network-> communication not possible)
-In order to establish comm via azure virtual network peering, this service allows u to connect virtal networks together.. The traffic across the VM's uses the MS backbone network.
+In order to establish comm via azure virtual network peering, this service allows u to connect virtal networks together.. The traffic across the VM's uses the 
+MS backbone network.
 u can connect VNetwork same region or across regions.
 When peering VNets together, they don't have overlapping CIDR blocks.
 VN 10.0.0.0/16, 10.0.1.0/24 -> might not be able to peer together.
+
 Lab -> Create a VM(testvm-linux)with new VNet(name:test-network) -> No public IP -> create
-Go to test-network -> Peerings -> Add -> name:test-app-linl, VN:app-network, name: app-test-link, -> click add button (created two peering)
-(This we can do from app-network as well, This wizard will create two peering connections, 1 from test-network-> to app-network and another from app-network-> test-network)
-GO to VMachine (testvm-linux) => connect via bastion -> here we can use bastion from app-network and able to connect to machine (we r not explicitly create Bastion here)
--> connect the machine and use curl command whether we are able to connect to another machine.
+       Go to test-network -> Peerings -> Add -> name:test-app-linl, VN:app-network, name: app-test-link, -> click add button (created two peering)
+       (This we can do from app-network as well, This wizard will create two peering connections, 1 from test-network-> to app-network and another from app-network-> test-network)
+       GO to VMachine (testvm-linux) => connect via bastion -> here we can use bastion from app-network and able to connect to machine (we r not explicitly create Bastion here)
+      -> connect the machine and use curl command whether we are able to connect to another machine.
 Commands -> sudo apt update
-sudo apt install nginx
-curl http://private_IP_Address
-***User defined routes (All the traffic in VNet needs to be routed through the virtual appliance) VNetwork -> has 3 subnets in place and have VM across subnets.
+            sudo apt install nginx
+            curl http://private_IP_Address
+
+***User defined routes (All the traffic in VNet needs to be routed through the virtual appliance)
+VNetwork -> has 3 subnets in place and have VM across subnets.
 Data Packet to be routed across macines, has source IP adress (where coming from) and destinition ip addcfess (where to go to). art
-How it goes from Source to destinition (traversal part)? -> In VNet has default system routes place ensures the traffic is routed correctly across subnets in VNEtwork. u can create ur own custom routes as well.
-Firewall has in one VMachine. ( All the traffic in VNet needs to be routed through the virtual appliance. we can define a user-defined route that makes sure all traffic is routed through the firewall appliance device.
+How it goes from Source to destinition (traversal part)? -> In VNet has default system routes place ensures the traffic is routed correctly across subnets in VNEtwork. 
+      u can create ur own custom routes as well.
 
+Firewall has in one VMachine. ( All the traffic in VNet needs to be routed through the virtual appliance. we can define a user-defined route that makes sure all traffic 
+       is routed through the firewall appliance device.
 
-I
 VNetwork 3 subnets -> VM1 VM2 VM3 (Firewall)
 LAB-> Deploy a new machine -> VM-> name: Centralvm-linux01, region:NU -> Netowrking -> app-network -> create new subnet -> name:central-subnet@1, -> ADD. -> public ip: None, -> create
-Create Route table -> create. GO to resource -> settings -> Routes -> Add ->
--> Subnets -> Associate
+      Create Route table -> create. GO to resource -> settings -> Routes -> Add ->
+                                                   -> Subnets -> Associate
 Go to central VM machine -> N/w settings -> Go to NI -> IP configurations -> Enable IP forwarding -> Apply
 Connect this machine using Bastion service -> :wq
 Restart machine
+
 ***Network Watcher Service ->
 Connection Monitor -> check network connectivity between machines.
 Next hop -> here u can see next route for a package of data. Helps u understand whether the packet is to the correct destination.
@@ -267,25 +283,37 @@ Connection troubleshoot -> check connection from VM to VM, fully qualified domai
 NSG Diagnostic-> provides detailed information that helps understand and debug the security config of network.
 Traffic analytics-> log information about IP traffic flowing through NSG.
 NSG Flow Logs -> provide visibility into user and application activity in network.
+
 ****Connection troubleshoot
-LAB -> Got to Network watcher >> N/w Diagnostic tools -> Connection troubleshoot -> source:appvm-linux01, destntn:webvm-linux01 >> Dest port:80, <> Connection Diagnostic:Connectivity -> Run diagnostic tests.
+LAB -> Got to Network watcher >> N/w Diagnostic tools -> Connection troubleshoot -> source:appvm-linux01, destntn:webvm-linux01 >> Dest port:80, -> Connection Diagnostic:Connectivity -> Run diagnostic tests.
+
 -> on source machine it has created AzureNetworkWatcher extension.
-Connection Monitor -> Provides end-to-end connection monitoring between machines. also between azure VM and On-premise machines, end-to-end monitoring on regular basis then we can use this. Conducting test on regular basis.
-LAB-> Go to N/w watcher -> connection monitor -> create -> name: monitor100, location:NorthEurope-> Next -> What r sources and destination, -> add sources-> IYpe:VM, Name: app-vm-linux81 -> Add endpoint,
-Add destination -> Type:VM, Name: Testvm -> Add endpoints.
-Add Test Configuration -> (Can my apvm-linux machine can coonect to testvm machine on port 80) -> name: TestWeb, TestErequest: EveryMinute. <> Add test Group -> create
-I...
+
+*****Connection Monitor -> Provides end-to-end connection monitoring between machines. also between azure VM and On-premise machines, end-to-end monitoring on regular 
+   basis then we can use this. Conducting test on regular basis.
+
+LAB-> Go to N/w watcher -> connection monitor -> create -> name: monitor100, location:NorthEurope-> Next -> What r sources and destination, -> add sources-> TYpe:VM, Name:app-vm-linux01 -> Add endpoint,
+     Add destination -> Type:VM, Name: Testvm -> Add endpoints.
+     Add Test Configuration -> (Can my apvm-linux machine can coonect to testvm machine on port 80) -> name: TestWeb, TestErequest: EveryMinute. 
+     Add test Group -> create
+
 **IP Flow Verify
-NSG defined at N/w interface level & at the subnet level. Lot of VMs, Multiple rules within NSG -> Problem with rule.
+NSG defined at N/w interface level & at the subnet level. 
+Lot of VMs, Multiple rules within NSG -> Problem with rule.
+
 LAB -> Go to N/w watcher -> IP Flow Verify -> Target:Webvm-linux01, NI:.., Verify IP flow -> Test
+
 **Next Hop ()very useful-> if the request are reaching the destination via intended path.
 Lab: N/w watcher -> Next hop ->
-**NSG Diagnostics -> This helps to understand if traffic is being allowed or denied based on NSGs. It also gives details of evaluation of rules. Similar to IP Flow Verify, one step further.
+
+**NSG Diagnostics -> This helps to understand if traffic is being allowed or denied based on NSGs. It also gives details of evaluation of rules. 
+                   Similar to IP Flow Verify, one step further.
 Lab: Go to N/w watcher -> N/w Diagnostics -> Target: WebVM-linux01, Direction: Inbound, Desti IP: (Webvm-linux machine IP address), Dest port:80, what rule is allowed and what not.
-**NSG Flow Logs -> Log information about IP traffic flowing through a NSG.
+
+***NSG Flow Logs -> Log information about IP traffic flowing through a NSG.
 Lab: Create storage account -> azure Blob -> primary workload:primary native -> create
-Go to N/w watcher -> Logs -> Elow logs -> create -> Type:NSG, select storage account -> analytics -> Traffic analytics:10 mins <> create wait for 20 mins
-Go to resource -> Log is stored in SA.
+     Go to N/w watcher -> Logs -> Flow logs -> create -> Type:NSG, select storage account -> analytics -> Traffic analytics:10 mins -> create wait for 20 mins
+     Go to resource -> Log is stored in SA.
 
 
 
