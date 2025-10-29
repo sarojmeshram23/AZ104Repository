@@ -50,12 +50,19 @@ LAB -> Go to Sorage Explorer tool -> rt click storage Account -> connect -> conn
        Add account Name, access key -> Connect.
 -> This will give u complete access to data from StorageAccount.
 -> Have ability to Upload and delete data, gives complete access using access keys.
+
 LAB for MacOS system -> Go to Storage Explorer tool -> sign in withAzure -> and u are able to access subscriptions and storageAccount data.
+
 ****SAS-BLOB level
-LAB -> Go to File in BLOB -> Generate SAS -> Generate SAS Token & URL (Based on parameter it will generate known as a token.This token used to now access this blob securely. Here u can add permissions as part of the token, also can add start and expiry, it means if u try to use token after expiry date, u will not gain access to the blob. Also can add Allow IP addresses from where the call is being made to access the blob. Click on generate SAS & URL. And u can see
+LAB -> Go to File in BLOB -> Generate SAS -> Generate SAS Token & URL (Based on parameter it will generate known as a token.
+This token used to now access this blob securely. Here u can add permissions as part of the token, also can add start and expiry, it means if u try to use token after expiry date, u will not gain access to the blob. 
+Also can add Allow IP addresses from where the call is being made to access the blob. 
+Click on generate SAS & URL. And u can see
 1. Blob SAS Token
 2. Blob SAS URL.
+
 --> Take SAS URL, go to browser and u will be able to access the file.
+
 ****SAS-Container level
 Go to Container -> On LHS -> Select Shared Access Tokens -> Generate SAS Token & URL
 
@@ -63,26 +70,40 @@ Go to Container -> On LHS -> Select Shared Access Tokens -> Generate SAS Token &
 ****SAS-Container level
 Go to Container -> On LHS -> Select Shared Access Tokens -> Generate SAS Token & URL
 The SAS URL can't be accessed from browser here coz browser can't unerstand how to access container at an individual level. so we can use storage explorer.
+
 Go to Storage Explorer -> rt click on Storage Account -> Blob container -> SAS URL -> (Permissions:Read, list are required to see the files from container) -> Next->
 connect.
+
 ****SAS-StorageAccount level
 Go to StACC -> Security ->SAS -> Generate SAS and Connection string.
+
 Go to Storage Explorer -> rt click on Storage Account -> Select StorageAccount or Service -> SAS -> next -> paste url in string -> Connect
+
 **Quel. Find the least permissions required for a Shared Access Signature to just enumerate the blobs in a container, working with below small config.
 -> AllowedServices: Blob, Allowed resource type:Container, AllowedPermission:list.
+
 ****Stored Access Policy****
 provides additional level control over SAS. -
 [ Under Stored Access Policies -> Add Policy -> Add details -> Save]
+
 Go to container -> settings -> Shared Access Token ->Condition:Stored Access Policy -> None(as of now).
-Scenario: SAS has gone into wrong hands, u have to invalidate SAS, link it on stored access policy. coz once u generate SAS Token & URL, any user who has got access to the token. Link it to the "Stored Access Policy".
+
+Scenario: SAS has gone into wrong hands, u have to invalidate SAS, link it on stored access policy. coz once u generate SAS Token & URL, any user who has got access to the token.
+       Link it to the "Stored Access Policy".
+
 Go to container -> Settings -> Access Policy -> Add Stored Access Policy -> Add Policy-> Identifier (Name): PolicyA, startTime ExpiryTime, Permissions -> Save
-Go to Shared Access token -> Add Policy -> Now the permission, Start&Expiry Time is disabled coz these are as per what we defined i policy -> Generate Iooken- Go to Storage Explorer -> Storage Acc -> rt cilk -> connect blob container -> Select SAS -> Connect -> visible container Data
-If SAS URL goes into wrong hands then we can't do anything coz withURL everything is already embedded, but we can edit the policy -> remove permissions -> OK -> Save Now the container data is not visible here.
-****Immutable BLOB storage:containers
+
+Go to Shared Access token -> Add Policy -> Now the permission, Start&Expiry Time is disabled coz these are as per what we defined i policy -> Generate Iooken-
+Go to Storage Explorer -> Storage Acc -> rt cilk -> connect blob container -> Select SAS -> Connect -> visible container Data
+
+If SAS URL goes into wrong hands then we can't do anything coz withURL everything is already embedded, but we can edit the policy -> remove permissions -> OK -> Save.
+Now the container data is not visible here.
 
 ****Immutable BLOB storage:containers
-This allow u define a policy where in u can get read access to data but u can not be modify the data. reat: For particular timeframe objects (temporary hold) can be read by they can not modified.
+This allow u define a policy where in u can get read access to data but u can not be modify the data. 
+reat: For particular timeframe objects (temporary hold) can be read by they can not modified.
 GO to container -> settings -> Access Policy -> Immutable Blob storage - Time based retention policy.
+
 ***Data Redundancy
 This we can see when we create StoAcc. How drable ur data that u stored on StorAcc. Availability. if storage unit goes down. store data in Data center. Azure maintain high availability of data.
 LRS -> 3 copies of data made in single DC. if one copy not available other is available.
