@@ -132,38 +132,51 @@ cost.
 Hot(default tier)-> this is optimized for objects that are accessed frequently.
 
 Cool -> This is ideal for obiects that are infrequently accessed. Here obiects need to be stored for minimum of "30 days". The storage cost is less as compared to hot access tier. 
+    but access cost is higher as compared to HOT.
 
-Cold->ideal for objects rarely accessed or modified, but u still need to access them. Here objects needs to be stored for minimum 90 days. Here storage cost is lower as compared to COOL access tier; but access cost higher. Archive -> ideal for objects rarely accessed. data stored for a minimum of 180 days.
+Cold->ideal for objects rarely accessed or modified, but u still need to access them. Here objects needs to be stored for minimum 90 days. 
+      Here storage cost is lower as compared to COOL access tier;
+      but access cost higher.
+Archive -> ideal for objects rarely accessed. data stored for a minimum of 180 days.
+
 Storage Cost: Hot > COOL > COLD > Archive
 Access COST: Hot < cool
+
 **** *LAB:Access Tier
 StorAcc -> Settings -> Configuration -> "Blob access Tier": Hot, Cool -> changing it to COOL -> SAVE
-1) Containers -> Existing Object's access tier now changed from HOT to COOL -> Now make the change as prey from COOL to HOT -> save (if u have object in container these need to be their for particular perioed if changed access tier then need to pay some cost for change.)
-2) GO to objects -> change tier -> least storage cost is archive ADD-> if changed to archive -> then we can not download/retriey the file. -> to access this file again we need to change its access tier -> from archive to Hot, rehydrate property: Standard-> this will take time.
+1) Containers -> Existing Object's access tier now changed from HOT to COOL -> Now make the change as prey from COOL to HOT -> save (if u have object in container these
+need to be their for particular perioed if changed access tier then need to pay some cost for change.)
+
+2) GO to objects -> change tier -> least storage cost is archive ADD-> if changed to archive -> then we can not download/retriey the file. -> to access this file 
+again we need to change its access tier -> from archive to Hot, rehydrate property: Standard-> this will take time.
+
 ****Lifecycle Policies
-SToAcc-> Data Mngt -> Lifecycle Mngt (List View, Code View) -> Add a rule -> Name: RuleA, Apply rules on all blocks -> next add condition -> if blobs not accessed from last 14 days then "Move to COOL storage" -> ADD.
+SToAcc-> Data Mngt -> Lifecycle Mngt (List View, Code View) -> Add a rule -> Name: RuleA, Apply rules on all blocks -> next add condition -> 
+     if blobs not accessed from last 14 days then "Move to COOL storage" -> ADD.
+
 Condition conatins: Last Modified, Created.
+
 NOTE: "Last Accessed" is not visible. TO make it visible for this TICK "ENABLE ACCESS TRACKING"
+
 Add ruleB -> Next -> last accessed -> 14 days -> move to cold storage -> Next -> filter set -> Blob Prefix:scripts/ (it means rule applies to only scripts container) -> ADD
-3) 2 rules based on same condition Lats accessed time for 14 days -> 1 rule cool storage and other move archive storage -> least expensive operation prefced. NOTE -Action delete is cheaper action than tierJoArchive, Action TierJoArchive is cheaper than TierIoCool.
+
+3) 2 rules based on same condition Lats accessed time for 14 days -> 1 rule cool storage and other move archive storage 
+     -> least expensive operation prefced. 
+
+NOTE -Action delete is cheaper action than tierToArchive, Action TierToArchive is cheaper than TierToCool.
+
 ****Lab : Object Replication
 Here objects can be replicated synchronously between source to destination storage account.
-Storage and destination storage acts: General purpose v2 or premium block blob accounts. Blob versioning needs to be enabled.
-Source Sto ACC->change feed is enabled.
 
-Azure Securi Az 3.0
-AZ104 Quer New Ti⚫
-MVC 1. ⚫
-Today.txt
-File Edit View
-Today. ⚫ News11.bxt News.but H1 ✓ E V B IGAB
-Extras.txt
-Exam AZ-104 PAwa * *
+Storage and destination storage acts: General purpose v2 or premium block blob accounts.
+Blob versioning needs to be enabled.
 Source Sto ACC->change feed is enabled.
 LAB: create Dest StoAcc -> Data Protection-> TICK enable versioning for BLOBS, -> CREATE.
+
 Got to source StAcc -> Data Memt -> Data Protection -> TICK Enable versioning for Blobs, TICK enable blob change feed -> save
 Got to source StAcc -> Data MGMT-> Object Replication -> create replication rules -> Select Destinition StAcc, source container:scripts, Dest container:scripts,copy cover: everything, -> Save (it will take time 1-2 min)
 Go to Dest -> Go to container -> create container -> crips -> Save
+
 ****BLOB snapshots
 A snapshot is a read-only version of a blob that's taken at a pont in time.
 
