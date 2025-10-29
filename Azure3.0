@@ -105,25 +105,33 @@ reat: For particular timeframe objects (temporary hold) can be read by they can 
 GO to container -> settings -> Access Policy -> Immutable Blob storage - Time based retention policy.
 
 ***Data Redundancy
-This we can see when we create StoAcc. How drable ur data that u stored on StorAcc. Availability. if storage unit goes down. store data in Data center. Azure maintain high availability of data.
+This we can see when we create StoAcc. How drable ur data that u stored on StorAcc. Availability. if storage unit goes down. store data in Data center. 
+Azure maintain high availability of data.
 LRS -> 3 copies of data made in single DC. if one copy not available other is available.
 GRS -> if DC goes down then u don't have access to ur objects. Here data is replicated synchronously across three azure availability zones in the primary region e.g.
 eastus.
 ZRS-> If entire region goes down then availability zones are not available. 3 copes of ur data are made available to a single physical location in the primary region using LRS. and 3-copies of ur data are made to single physical location in secondary region using LRS. Now data is available in 2 regions. Note -> Here chare is hig, as data copied from primary region to sec region.
 GZRS -> Here data is replicated synchronously across three azure availability zones in primary region. 3-copies of ur data are made to a single physical location in the secondary region using LRS.
+
 ****Storage Redundancy
 StoraAcc -> Data management -> Redundancy -> Change the redundancy option -> save
-*Access Tiers - Hot, cool, cold, Archieve
+
+****Access Tiers - Hot, cool, cold, Archieve
 In Blob storage StorAcc.
+
 Pricing--> charge as per each gig store in SA.
 PREMIUM - faster access to ur data. that has separate storage cost.
 HOT
-COOL COLD
+COOL
+COLD
 ARCHIEVE
+
 Company uploading images on azure SA, during 1st week, images are being accessed frequently. and after a week images are not accessed/used at all. still eating up
 cost.
+
 Hot(default tier)-> this is optimized for objects that are accessed frequently.
-Cool -> This is ideal for obiects that are infrequently accessed. Here obiects need to be stored for minimum of "30 days". The storage cost is less as compared to hot.
+
+Cool -> This is ideal for obiects that are infrequently accessed. Here obiects need to be stored for minimum of "30 days". The storage cost is less as compared to hot access tier. 
 
 Cold->ideal for objects rarely accessed or modified, but u still need to access them. Here objects needs to be stored for minimum 90 days. Here storage cost is lower as compared to COOL access tier; but access cost higher. Archive -> ideal for objects rarely accessed. data stored for a minimum of 180 days.
 Storage Cost: Hot > COOL > COLD > Archive
